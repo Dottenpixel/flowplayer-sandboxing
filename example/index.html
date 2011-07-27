@@ -1,0 +1,124 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- A minimal Flowplayer setup to get you started -->
+  
+
+	<!-- 
+		include flowplayer JavaScript file that does  
+		Flash embedding and provides the Flowplayer API.
+	-->
+	<script type="text/javascript" src="flowplayer-3.2.6.min.js"></script>
+	<script type="text/javascript" src="flowplayer.ipad-3.2.2.min.js"></script>
+	
+	<!-- some minimal styling, can be removed -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+	<!-- page title -->
+	<title>Minimal Flowplayer setup</title>
+
+</head><body>
+
+	<div id="page">
+		
+		<h1>Minimal Flowplayer setup</h1>
+	
+		<p>View commented source code to get familiar with Flowplayer installation.</p>
+		
+		<h3>HTTP</h3>
+		
+		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
+		<a  
+			 href="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv"
+			 style="display:block;width:640px;height:360px"  
+			 id="player"> 
+		</a> 
+	
+		<!-- this will install flowplayer inside previous A- tag. -->
+		<script>
+			flowplayer("player", "../flowplayer-3.2.7.swf", {
+				clip: {
+					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
+				}
+			}).ipad();
+		</script>
+
+		<h3>RTMP - Streaming</h3>
+
+		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
+		<a  
+			href="rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv"
+			style="display:block;width:640px;height:360px"  
+			id="rtmp_player"> 
+		</a> 
+	
+		<!-- this will install flowplayer inside previous A- tag. -->
+		<script>
+			flowplayer("rtmp_player", "../flowplayer-3.2.7.swf", {
+				log: { level: 'debug', filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*' },
+
+				clip: {
+					// configure clip to use influxis as our provider, it uses our rtmp plugin
+					provider: 'rtmp',
+					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
+				},
+
+				// streaming plugins are configured under the plugins node
+				plugins: {
+
+					// here is our rtpm plugin configuration
+					akamai: { url: '../flowplayer.akamai-3.2.0.swf' },
+					rtmp: { url: '../flowplayer.rtmp-3.2.3.swf' }
+				}
+				
+			}).ipad();
+		</script>
+		
+		<h3>iOS</h3> 
+
+		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
+		<a  
+			href="http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
+			style="display:block;width:640px;height:360px"  
+			id="ios_player"> 
+		</a> 
+	
+		<!-- this will install flowplayer inside previous A- tag. -->
+		<script>
+			flowplayer("ios_player", "../flowplayer-3.2.7.swf").ipad();
+		</script>
+		
+		<!-- 
+			after this line is purely informational stuff. 
+			does not affect on Flowplayer functionality 
+		-->
+
+		<p>		
+			If you are running these examples <strong>locally</strong> and not on some webserver you must edit your 
+			<a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html">
+				Flash security settings</a>. 
+		</p>
+		
+		<p class="less">
+			Select "Edit locations" &gt; "Add location" &gt; "Browse for files" and select
+			flowplayer-x.x.x.swf you just downloaded.
+		</p>
+		
+		
+		<h2>Documentation</h2>
+		
+		<p>
+			<a href="http://flowplayer.org/documentation/installation/index.html">Flowplayer installation</a>
+		</p>
+
+		<p>
+			<a href="http://flowplayer.org/documentation/configuration/index.html">Flowplayer configuration</a>
+		</p>
+
+		<p>
+			See this identical page on <a href="http://flowplayer.org/demos/example/index.htm">Flowplayer website</a> 
+		</p>
+		
+	</div>
+	
+	
+</body></html>
