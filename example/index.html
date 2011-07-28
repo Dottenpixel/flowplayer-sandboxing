@@ -36,8 +36,21 @@
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
 			flowplayer("player", "../flowplayer-3.2.7.swf", {
+				onLoad: function() { console.log("loaded"); },
+				onMute: function() { console.log("mute"); },
+				onUnmute: function() { console.log("unmute"); },
+				onFullscreenExit: function() { console.log("fullscreen exit"); },
+				onFullscreen: function() { console.log("fullscreen"); },
+				onVolume: function(level) { console.log("volume level is now " + level); },
+				
 				clip: {
-					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
+					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
+					onStart: function() { console.log("start"); },
+					onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
+					onBegin: function() { console.log("begin"); },
+					onStop: function() { console.log("stop"); },
+					onResume: function() { console.log("resume"); },
+					onPause: function() { console.log("pause"); console.log(this.getStatus()); console.log(this.getTime()); }
 				}
 			}).ipad();
 		</script>
@@ -54,7 +67,8 @@
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
 			flowplayer("rtmp_player", "../flowplayer-3.2.7.swf", {
-				log: { level: 'debug', filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*' },
+				//log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
+				//},
 
 				clip: {
 					// configure clip to use influxis as our provider, it uses our rtmp plugin
@@ -84,7 +98,24 @@
 	
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
-			flowplayer("ios_player", "../flowplayer-3.2.7.swf").ipad();
+			flowplayer("ios_player", "../flowplayer-3.2.7.swf", {
+				onLoad: function() { console.log("loaded"); },
+				onMute: function() { console.log("mute"); },
+				onUnmute: function() { console.log("unmute"); },
+				onFullscreenExit: function() { console.log("fullscreen exit"); },
+				onFullscreen: function() { console.log("fullscreen"); },
+				onVolume: function(level) { console.log("volume level is now " + level); },
+				
+				clip: {
+					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
+					onStart: function() { console.log("start"); },
+					onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
+					onBegin: function() { console.log("begin"); },
+					onStop: function() { console.log("stop"); },
+					onResume: function() { console.log("resume"); },
+					onPause: function() { console.log("pause"); }
+				}
+			}).ipad();
 		</script>
 		
 		<!-- 
