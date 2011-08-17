@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- A minimal Flowplayer setup to get you started -->
+  
+
+	<!-- 
+		include flowplayer JavaScript file that does  
+		Flash embedding and provides the Flowplayer API.
+	-->
+	<script type="text/javascript" src="flowplayer-3.2.6.min.js"></script>
+	<script type="text/javascript" src="flowplayer.ipad-3.2.2.min.js"></script>
+	
+	<!-- some minimal styling, can be removed -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<style type="text/css" media="screen">
+		#config {
+			font-size: 12px;
+			text-align: left;
+		}
+		#config h1{
+			font-size: 14px;
+		}
+		p.field input[type=text] {
+			width: 500px;
+		}
+		p.field input {
+			position: absolute;
+			left: 200px;
+		}
+		p.caption {
+			font-size: 10px;
+			color: #666;
+		}
+		p.caption em {
+			display: block;
+		}
+	</style>
+	
+	<!-- page title -->
+	<title>Minimal Flowplayer setup</title>
+
+</head><body>
+
+	<div id="config">
+		<h1>Config</h1>
+		<form action="#" method="get" accept-charset="utf-8">
+			<p class="field"><label for="i1">Default Video URL</label> <input type="text" name="i1" value="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv" id="i1" /></p>
+			<p class="caption">Possible demo values: 
+				<em>rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
+				<em>http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
+			</p>
+			<p class="field">
+				<label for="i4a">RTMP</label> <input type="radio" name="i4" value="rtmp" id="i4a"/>
+			</p>
+			<p class="field">
+				<label for="i4b">HTTP</label> <input type="radio" name="i4" value="http" id="i4b"/>
+			</p>
+			<p class="field"><label for="i2">Mobile Video URL</label> <input type="text" name="i2" value="http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4" id="i2" /></p>
+			<p class="caption">Possible demo values: 
+				<em>http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4</em>
+			</p>
+			<p class="field"><label for="i3">Auto play?</label> <input type="checkbox" name="i3" value="" id="i3" /></p>
+			
+
+			<p class="field"><input type="submit" value="Continue &rarr;"></p>
+		</form>
+	</div>
+	<div id="page">
+		
+		<h1>UB Flowplayer setup</h1>
+	
+		<h3>HTTP</h3>
+		
+		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
+		<a  
+			 href="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv"
+			 style="display:block;width:640px;height:360px"  
+			 id="player"> 
+		</a> 
+	
+		<!-- this will install flowplayer inside previous A- tag. -->
+		<script>
+			flowplayer("player", "../flowplayer-3.2.7.swf", {
+				onLoad: function() { console.log("loaded"); },
+				onMute: function() { console.log("mute"); },
+				onUnmute: function() { console.log("unmute"); },
+				onFullscreenExit: function() { console.log("fullscreen exit"); },
+				onFullscreen: function() { console.log("fullscreen"); },
+				onVolume: function(level) { console.log("volume level is now " + level); },
+				
+				clip: {
+					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
+					onStart: function() { console.log("start"); },
+					onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
+					onBegin: function() { console.log("begin"); },
+					onStop: function() { console.log("stop"); },
+					onResume: function() { console.log("resume"); },
+					onPause: function() { console.log("pause"); console.log(this.getStatus()); console.log(this.getTime()); }
+				}
+			}).ipad();
+		</script>
+
+		<h3>RTMP - Streaming</h3>
+
+		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
+		<a  
+			href="rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv"
+			style="display:block;width:640px;height:360px"  
+			id="rtmp_player"> 
+		</a> 
+	
+		<!-- this will install flowplayer inside previous A- tag. -->
+		<script>
+			flowplayer("rtmp_player", "../flowplayer-3.2.7.swf", {
+				//log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
+				//},
+
+				clip: {
+					// configure clip to use influxis as our provider, it uses our rtmp plugin
+					provider: 'rtmp',
+					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
+				},
+
+				// streaming plugins are configured under the plugins node
+				plugins: {
+
+					// here is our rtpm plugin configuration
+					akamai: { url: '../flowplayer.akamai-3.2.0.swf' },
+					rtmp: { url: '../flowplayer.rtmp-3.2.3.swf' }
+				}
+				
+			}).ipad();
+		</script>
+		
+		<h3>iOS</h3> 
+
+		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
+		<a  
+			href="http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
+			style="display:block;width:640px;height:360px"  
+			id="ios_player"> 
+		</a> 
+	
+		<!-- this will install flowplayer inside previous A- tag. -->
+		<script>
+			flowplayer("ios_player", "../flowplayer-3.2.7.swf", {
+				onLoad: function() { console.log("loaded"); },
+				onMute: function() { console.log("mute"); },
+				onUnmute: function() { console.log("unmute"); },
+				onFullscreenExit: function() { console.log("fullscreen exit"); },
+				onFullscreen: function() { console.log("fullscreen"); },
+				onVolume: function(level) { console.log("volume level is now " + level); },
+				
+				clip: {
+					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
+					onStart: function() { console.log("start"); },
+					onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
+					onBegin: function() { console.log("begin"); },
+					onStop: function() { console.log("stop"); },
+					onResume: function() { console.log("resume"); },
+					onPause: function() { console.log("pause"); }
+				}
+			}).ipad();
+		</script>
+		
+		<!-- 
+			after this line is purely informational stuff. 
+			does not affect on Flowplayer functionality 
+		-->
+
+	
+	</div>
+	
+	
+</body></html>
