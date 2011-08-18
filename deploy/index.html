@@ -45,6 +45,9 @@
 	<div id="config">
 		<h1>Config</h1>
 		<form action="#" method="get" accept-charset="utf-8">
+			<p class="field"><label for="i5">Width</label> <input type="text" name="i5" value="640" /></p>
+			<p class="field"><label for="i6">Height</label> <input type="text" name="i6" value="360" id="i6" /></p>
+
 			<p class="field"><label for="i1">Default Video URL</label> <input type="text" name="i1" value="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv" id="i1" /></p>
 			<p class="caption">Possible demo values: 
 				<em>rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
@@ -81,7 +84,78 @@
 	
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
-			flowplayer("player", "../flowplayer-3.2.7.swf", {
+			flowplayer("player", "../flowplayer.commercial-3.2.7.swf", {
+				
+				// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
+				// 				},
+				
+				// commercial version requires product key
+				key: '#$bead3df70bd3bde72c8',
+				
+				/*
+					logo can a JPG, PNG or SWF file.
+					NOTE: the logo can only be changed in commercial versions
+					the url must be absolute or relative to the flowplayer SWF
+				*/
+				logo: {
+
+					// default logo and its position, relative to video SWF
+					url: 'deploy/img/video_logo.png',
+					bottom: 10,
+					left: 10,
+					opacity: 0.4,
+
+					// for SWF-based logos you can supply a relative size (to make the logo larger in fullscreen)
+					// width: '6.5%',
+					// height: '6.5%',
+
+					// if set to false, then the logo is also shown in non-fullscreen mode
+					fullscreenOnly: false,
+
+					// time to display logo (in seconds). 0 = show forever
+					displayTime: 0,
+
+					/*
+						if displayTime > 0 then this specifies the time it will take for
+						the logo to fade out. this happens internally by changing the opacity
+						property from its initial value to full transparency.
+						value is given in milliseconds.
+					*/
+					fadeSpeed: 0,
+
+					// for commercial versions you can specify where the user is redirected when the logo is clicked
+					linkUrl: 'http://flowplayer.org'
+				},
+				
+				play: {
+
+					/*
+						relative path to the play button, this can be a JPG, PNG or SWF file.
+						NOTE: the button can only be changed in the commercial versions
+					*/
+					url: 'img/video_loader_3d.png',
+
+					// all display properties, except the z-index, can be modified in all versions
+					opacity: 0.8,
+
+					// label text; by default there is no text
+					label: null,
+
+					// label text at end of video clip
+					replayLabel: 'Play again',
+
+					/*
+						progress indicator - this is shown while video is being loaded.
+						it is always in the same place as the play button.
+					*/
+					// how fast progress indicator fades out after video is loaded
+					fadeSpeed: 500,
+
+					// how fast buffering animation rotates
+					rotateSpeed: 50
+
+				},
+				
 				onLoad: function() { console.log("loaded"); },
 				onMute: function() { console.log("mute"); },
 				onUnmute: function() { console.log("unmute"); },
@@ -97,6 +171,16 @@
 					onStop: function() { console.log("stop"); },
 					onResume: function() { console.log("resume"); },
 					onPause: function() { console.log("pause"); console.log(this.getStatus()); console.log(this.getTime()); }
+				},
+				
+				plugins: {
+					controls: {
+						fullscreen : true,
+						autoHide: {
+							enabled: true,
+							fullscreenOnly: false
+						}
+					}
 				}
 			}).ipad();
 		</script>
@@ -112,25 +196,25 @@
 	
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
-			flowplayer("rtmp_player", "../flowplayer-3.2.7.swf", {
-				//log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
-				//},
-
-				clip: {
-					// configure clip to use influxis as our provider, it uses our rtmp plugin
-					provider: 'rtmp',
-					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
-				},
-
-				// streaming plugins are configured under the plugins node
-				plugins: {
-
-					// here is our rtpm plugin configuration
-					akamai: { url: '../flowplayer.akamai-3.2.0.swf' },
-					rtmp: { url: '../flowplayer.rtmp-3.2.3.swf' }
-				}
-				
-			}).ipad();
+			// flowplayer("rtmp_player", "../flowplayer-3.2.7.swf", {
+			// 	//log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
+			// 	//},
+			// 
+			// 	clip: {
+			// 		// configure clip to use influxis as our provider, it uses our rtmp plugin
+			// 		provider: 'rtmp',
+			// 		ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
+			// 	},
+			// 
+			// 	// streaming plugins are configured under the plugins node
+			// 	plugins: {
+			// 
+			// 		// here is our rtpm plugin configuration
+			// 		akamai: { url: '../flowplayer.akamai-3.2.0.swf' },
+			// 		rtmp: { url: '../flowplayer.rtmp-3.2.3.swf' }
+			// 	}
+			// 	
+			// }).ipad();
 		</script>
 		
 		<h3>iOS</h3> 
@@ -144,24 +228,24 @@
 	
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
-			flowplayer("ios_player", "../flowplayer-3.2.7.swf", {
-				onLoad: function() { console.log("loaded"); },
-				onMute: function() { console.log("mute"); },
-				onUnmute: function() { console.log("unmute"); },
-				onFullscreenExit: function() { console.log("fullscreen exit"); },
-				onFullscreen: function() { console.log("fullscreen"); },
-				onVolume: function(level) { console.log("volume level is now " + level); },
-				
-				clip: {
-					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
-					onStart: function() { console.log("start"); },
-					onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
-					onBegin: function() { console.log("begin"); },
-					onStop: function() { console.log("stop"); },
-					onResume: function() { console.log("resume"); },
-					onPause: function() { console.log("pause"); }
-				}
-			}).ipad();
+			// flowplayer("ios_player", "../flowplayer-3.2.7.swf", {
+			// 	onLoad: function() { console.log("loaded"); },
+			// 	onMute: function() { console.log("mute"); },
+			// 	onUnmute: function() { console.log("unmute"); },
+			// 	onFullscreenExit: function() { console.log("fullscreen exit"); },
+			// 	onFullscreen: function() { console.log("fullscreen"); },
+			// 	onVolume: function(level) { console.log("volume level is now " + level); },
+			// 	
+			// 	clip: {
+			// 		ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
+			// 		onStart: function() { console.log("start"); },
+			// 		onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
+			// 		onBegin: function() { console.log("begin"); },
+			// 		onStop: function() { console.log("stop"); },
+			// 		onResume: function() { console.log("resume"); },
+			// 		onPause: function() { console.log("pause"); }
+			// 	}
+			// }).ipad();
 		</script>
 		
 		<!-- 
