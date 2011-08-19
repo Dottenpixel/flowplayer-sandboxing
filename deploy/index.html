@@ -16,12 +16,33 @@
 	<!-- some minimal styling, can be removed -->
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<style type="text/css" media="screen">
+		body {
+			margin: 0;
+			padding: 0;
+		}
 		#config {
+			position: relative;
 			font-size: 12px;
 			text-align: left;
+			background: #ddd;
+			padding: 10px 10px 40px 10px;
+			float: right;
 		}
 		#config h1{
 			font-size: 14px;
+			margin: 8px 0;
+			color: #444;
+		}
+		#config form {
+			width: 600px;
+			padding: 0 0 40px 0;
+		}
+		#config .debug {
+			padding: 0 0 0 25px;
+		}
+		#config .debug textarea {
+			width: 300px;
+			height: 400px;
 		}
 		.overlay {
 			width: 640px;
@@ -34,7 +55,7 @@
 			margin: 0;
 		}
 		p.field input[type=text] {
-			width: 500px;
+			width: 400px;
 		}
 		p.field select,
 		p.field input {
@@ -62,6 +83,12 @@
 			left: 0;
 			display: none;
 		}
+		#page {
+			margin: 50px;
+		}
+		.clear {
+			clear: both;
+		}
 	</style>
 	
 	<!-- page title -->
@@ -70,60 +97,82 @@
 </head><body>
 
 	<div id="config">
-		<h1>Config</h1>
-		<form action="#" method="get" accept-charset="utf-8">
-			<p class="field"><label for="i7">Site</label>
-					<select name="i7" id="i7" onchange="" size="1">
-						<option value="option1">unionbank.com</option>
-						<option value="option2">uboc.com</option>
-						<option value="option3">highmarkcapital.com</option>
-						<option value="option4">unionbankcareers.com</option>
-					</select>
-			</p>
-			<p class="field"><label for="i5">Width</label> <input type="text" name="i5" value="640" /></p>
-			<p class="field"><label for="i6">Height</label> <input type="text" name="i6" value="360" id="i6" /></p>
+		<h1>Configuration</h1>
+		<div class="form">
+			<form action="#" method="get" accept-charset="utf-8">
+				<p class="field"><label for="i3">Auto play?</label> <input type="checkbox" name="i3" value="" id="i3" /></p>
+				<p class="field"><label for="i7">Site</label>
+						<select name="i7" id="i7" onchange="" size="1">
+							<option value="option1">unionbank.com</option>
+							<option value="option2">uboc.com</option>
+							<option value="option3">highmarkcapital.com</option>
+							<option value="option4">unionbankcareers.com</option>
+						</select>
+				</p>
+				<p class="field"><label for="i9">Tracking Event ID</label> <input type="text" name="i9" value="012345678" /></p>
+				<p class="field"><label for="i5">Width</label> <input type="text" name="i5" value="640" /></p>
+				<p class="field"><label for="i6">Height</label> <input type="text" name="i6" value="360" id="i6" /></p>
 
-			<p class="field"><label for="i1">Default Video URL</label> <input type="text" name="i1" value="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv" id="i1" /></p>
-			<p class="caption">Possible demo values: 
-				<em>rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
-				<em>http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
-				<em>http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv</em>
-			</p>
-			<p class="field">
-				<label for="i4a">RTMP</label> <input type="radio" name="i4" value="rtmp" id="i4a"/>
-			</p>
-			<p class="field">
-				<label for="i4b">HTTP</label> <input type="radio" name="i4" value="http" id="i4b"/>
-			</p>
-			<p class="field"><label for="i2">Mobile Video URL</label> <input type="text" name="i2" value="http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4" id="i2" /></p>
-			<p class="caption">Possible demo values: 
-				<em>http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4</em>
-			</p>
-			<p class="field"><label for="i3">Auto play?</label> <input type="checkbox" name="i3" value="" id="i3" /></p>
+				<p class="field"><label for="i1">Default Video URL</label> <input type="text" name="i1" value="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv" id="i1" /></p>
+				<p class="caption">Possible demo values: 
+					<em>rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
+					<em>http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
+					<em>http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv</em>
+				</p>
+				<p>Default Video Protocol</p>
+				<p class="field">
+					<label for="i4a">RTMP</label> <input type="radio" name="i4" value="rtmp" id="i4a"/>
+				</p>
+				<p class="field">
+					<label for="i4b">HTTP</label> <input type="radio" name="i4" value="http" id="i4b"/>
+				</p>
+				<p class="field"><label for="i2">Mobile Video URL</label> <input type="text" name="i2" value="http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4" id="i2" /></p>
+				<p class="caption">Possible demo values: 
+					<em>http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4</em>
+				</p>
+				<p>Mobile Video Protocol</p>
+				<p class="field">
+					<label for="i8a">RTMP</label> <input type="radio" name="i8" value="rtmp" id="i8a"/>
+				</p>
+				<p class="field">
+					<label for="i8b">HTTP</label> <input type="radio" name="i8" value="http" id="i8b"/>
+				</p>
 			
 
-			<p class="field"><input type="submit" value="Continue &rarr;"></p>
-		</form>
+				<p class="field"><input type="submit" value="Continue &rarr;"></p>
+			</form>
+		</div>
+		<div class="debug">
+			<h1>Tracking Calls</h1>
+			<textarea class="debug_text" style="margin: 0;overflow:hidden;"></textarea>
+		</div>
+		<div class="clear"></div>
 	</div>
 	<div id="page">
 		
 		<h1>UB Flowplayer setup</h1>
 	
-		<h3>HTTP</h3>
+		<h3>Functional Review</h3>
 		
 		<div class="video_area">
 		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
 			<a  
 				 href="http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv"
 				 style="display:block;width:640px;height:360px"  
-				 id="player"
+				 id="vid_012345678"
 				 class="video_player"> 
 			</a>
-			<div class="overlay"><textarea class="embed_text" style="margin: 0;overflow:hidden;"></textarea>
+			<div class="overlay"><textarea class="embed_text" style="margin: 0;overflow:hidden;"></textarea></div>
 		</div>
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
-			$f("player", {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
+			$.fn.vidtrack = function( e ) {
+				var c = $(this).text();
+				var cc = c + e;
+				$(this).text(cc);
+			};
+			
+			$f("vid_012345678", {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
 				
 				// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
 				// 				},
@@ -166,36 +215,36 @@
 					linkUrl: 'http://flowplayer.org'
 				},
 				
-				play: {
+				// play: {
+				// 
+				// 	/*
+				// 		relative path to the play button, this can be a JPG, PNG or SWF file.
+				// 		NOTE: the button can only be changed in the commercial versions
+				// 	*/
+				// 	url: 'img/video_loader_3d.png',
+				// 
+				// 	// all display properties, except the z-index, can be modified in all versions
+				// 	opacity: 0.8,
+				// 
+				// 	// label text; by default there is no text
+				// 	label: null,
+				// 
+				// 	// label text at end of video clip
+				// 	replayLabel: 'Play again',
+				// 
+				// 	/*
+				// 		progress indicator - this is shown while video is being loaded.
+				// 		it is always in the same place as the play button.
+				// 	*/
+				// 	// how fast progress indicator fades out after video is loaded
+				// 	fadeSpeed: 500,
+				// 
+				// 	// how fast buffering animation rotates
+				// 	rotateSpeed: 50
+				// 
+				// },
 				
-					/*
-						relative path to the play button, this can be a JPG, PNG or SWF file.
-						NOTE: the button can only be changed in the commercial versions
-					*/
-					url: 'img/video_loader_3d.png',
-				
-					// all display properties, except the z-index, can be modified in all versions
-					opacity: 0.8,
-				
-					// label text; by default there is no text
-					label: null,
-				
-					// label text at end of video clip
-					replayLabel: 'Play again',
-				
-					/*
-						progress indicator - this is shown while video is being loaded.
-						it is always in the same place as the play button.
-					*/
-					// how fast progress indicator fades out after video is loaded
-					fadeSpeed: 500,
-				
-					// how fast buffering animation rotates
-					rotateSpeed: 50
-				
-				},
-				
-				onLoad: function() { console.log("loaded"); var cc=this.getClip(0); console.log(this.getParent()); console.log(cc); },
+				onLoad: function(c) { $(".debug_text").vidtrack("loaded"); console.log("loaded"); var cc=this.getClip(0); console.log(c); console.log(cc); },
 				onMute: function() { console.log("mute"); },
 				onUnmute: function() { console.log("unmute"); },
 				onFullscreenExit: function() { console.log("fullscreen exit"); },
@@ -216,12 +265,10 @@
 					onResume: function() { console.log("resume"); },
 					onPause: function() { console.log("pause"); console.log(this.getStatus()); console.log(this.getTime()); }
 				},
-				screen: { bottom: 28},
 				plugins: {
 					controls: {
 						fullscreen : true,
 						bottom: 0,
-						height: 28,
 						autoHide: "never"
 					}
 				}
@@ -235,14 +282,14 @@
 			
 		</script>
 
-		<h3>RTMP - Streaming</h3>
+		<!-- <h3>RTMP - Streaming</h3> -->
 
 		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
-		<a  
+		<!-- <a  
 			href="rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv"
 			style="display:block;width:640px;height:360px"  
 			id="rtmp_player"> 
-		</a> 
+		</a>  -->
 	
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
@@ -267,14 +314,14 @@
 			// }).ipad();
 		</script>
 		
-		<h3>iOS</h3> 
+		<!-- <h3>iOS</h3>  -->
 
 		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
-		<a  
+		<!-- <a  
 			href="http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
 			style="display:block;width:640px;height:360px"  
 			id="ios_player"> 
-		</a> 
+		</a>  -->
 	
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
