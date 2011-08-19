@@ -34,7 +34,7 @@
 			color: #444;
 		}
 		#config form {
-			width: 600px;
+			width: 400px;
 			padding: 0 0 40px 0;
 		}
 		#config .debug {
@@ -55,7 +55,7 @@
 			margin: 0;
 		}
 		p.field input[type=text] {
-			width: 400px;
+			width: 200px;
 		}
 		p.field select,
 		p.field input {
@@ -85,6 +85,9 @@
 		}
 		#page {
 			margin: 50px;
+		}
+		.video_player {
+			background: #000 url(img/video_loader_3d.png) no-repeat center center;
 		}
 		.clear {
 			clear: both;
@@ -162,13 +165,14 @@
 				 id="vid_012345678"
 				 class="video_player"> 
 			</a>
-			<div class="overlay"><textarea class="embed_text" style="margin: 0;overflow:hidden;"></textarea></div>
+			<div class="overlay"><textarea class="embed_text" style="margin: 0;overflow:hidden;"></textarea><a class="close" href="#">close</a></div>
 		</div>
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
 			$.fn.vidtrack = function( e ) {
 				var c = $(this).text();
-				var cc = c + e;
+				var t = new Date().getTime().toString() + " >> " + e + "\n";
+				var cc = c + t;
 				$(this).text(cc);
 			};
 			
@@ -178,7 +182,7 @@
 				// 				},
 				
 				// commercial version requires product key
-				key: '#$bead3df70bd3bde72c8',
+				key: '#@905cc47e8164939b12d',
 				
 				/*
 					logo can a JPG, PNG or SWF file.
@@ -244,26 +248,92 @@
 				// 
 				// },
 				
-				onLoad: function(c) { $(".debug_text").vidtrack("loaded"); console.log("loaded"); var cc=this.getClip(0); console.log(c); console.log(cc); },
-				onMute: function() { console.log("mute"); },
-				onUnmute: function() { console.log("unmute"); },
-				onFullscreenExit: function() { console.log("fullscreen exit"); },
-				onFullscreen: function() { console.log("fullscreen"); },
-				onVolume: function(level) { console.log("volume level is now " + level); },
+				onLoad: function(c) { 
+					$(".debug_text").vidtrack("loaded");
+					//console.log("loaded"); 
+					var cc=this.getClip(0);
+					//console.log(c);
+					//console.log(cc);
+				},
+				onMute: function() { 
+					$(".debug_text").vidtrack("mute");
+					//console.log("mute"); 
+				},
+				onUnmute: function() { 
+					$(".debug_text").vidtrack("unmute"); 
+					//console.log("unmute"); 
+				},
+				onFullscreenExit: function() { 
+					$(".debug_text").vidtrack("fullscreen_exit");
+					//console.log("fullscreen exit"); 
+				},
+				onFullscreen: function() { 
+					$(".debug_text").vidtrack("fullscreen");
+					//console.log("fullscreen"); 
+				},
+				onVolume: function(level) { 
+					$(".debug_text").vidtrack("volume_"+level);
+					//console.log("volume level is now " + level); 
+				},
 				
 				clip: {
 					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
 					autoPlay : false,
 					autoBuffering : true,
 					bufferLength : 10,
-					onStart: function(c) { console.log("start");  },
-					onSeek: function(c,t) { console.log("seeked to"); console.log(c); console.log(t); },
-					onBeforeBegin: function(c) { var cc=c;console.log(cc.metaData) },
-					onMetaData: function(c){ console.log("metaData"); var cc=c;console.log(cc) },
-					onBegin: function(c) { console.log("begin"); console.log(c); },
-					onStop: function(c) { console.log("stop"); },
-					onResume: function() { console.log("resume"); },
-					onPause: function() { console.log("pause"); console.log(this.getStatus()); console.log(this.getTime()); }
+					onStart: function(c) { 
+						//console.log("start");
+					},
+					onSeek: function(c,t) { 
+						$(".debug_text").vidtrack("seek_"+t); 
+						//console.log("seeked to"); 
+						//console.log(c);
+						//console.log(t); 
+					},
+					onBeforeBegin: function(c) { 
+						var cc=c;
+						//console.log(cc.metaData) 
+					},
+					onMetaData: function(c){ //console.log("metaData"); 
+						var cc=c;//console.log(cc); 
+						var fd = c.fullDuration;
+						var cues = [
+							{ time:fd*.25*1000, name: "25%" }, 
+							{ time:fd*.5*1000, name: "50%" }, 
+							{ time:fd*.75*1000, name: "75%" }
+						];
+
+						c.onCuepoint(
+							// each integer represents milliseconds in the timeline
+							cues,
+							// this function is triggered when a cuepoint is reached
+							function(clip, cuepoint) {
+								$(".debug_text").vidtrack("progress_"+cuepoint.name);
+							}
+						 );
+					},
+					onBegin: function(c) { 
+						//console.log("begin");
+						//console.log(c);
+					},
+					onStop: function(c) { 
+						$(".debug_text").vidtrack("stop"); 
+						//console.log("stop"); 
+					},
+					onResume: function() { 
+						$(".debug_text").vidtrack("play");
+						//console.log("resume");
+					},
+					onPause: function() { 
+						$(".debug_text").vidtrack("pause");
+						//console.log("pause");
+						//console.log(this.getStatus());
+						//console.log(this.getTime());
+					},
+					onFinish: function(c) {
+						$(".debug_text").vidtrack("finish");
+						//console.log("finish");
+					}
 				},
 				plugins: {
 					controls: {
@@ -273,7 +343,7 @@
 					}
 				}
 			}).ipad(); //{simulateiDevice: true}
-			
+		
 			// get the embedding code
 			var code = $f().embed().getEmbedCode();
 			
@@ -326,21 +396,21 @@
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
 			// flowplayer("ios_player", "../flowplayer-3.2.7.swf", {
-			// 	onLoad: function() { console.log("loaded"); },
-			// 	onMute: function() { console.log("mute"); },
-			// 	onUnmute: function() { console.log("unmute"); },
-			// 	onFullscreenExit: function() { console.log("fullscreen exit"); },
-			// 	onFullscreen: function() { console.log("fullscreen"); },
-			// 	onVolume: function(level) { console.log("volume level is now " + level); },
+			// 	onLoad: function() { //console.log("loaded"); },
+			// 	onMute: function() { //console.log("mute"); },
+			// 	onUnmute: function() { //console.log("unmute"); },
+			// 	onFullscreenExit: function() { //console.log("fullscreen exit"); },
+			// 	onFullscreen: function() { //console.log("fullscreen"); },
+			// 	onVolume: function(level) { //console.log("volume level is now " + level); },
 			// 	
 			// 	clip: {
 			// 		ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
-			// 		onStart: function() { console.log("start"); },
-			// 		onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
-			// 		onBegin: function() { console.log("begin"); },
-			// 		onStop: function() { console.log("stop"); },
-			// 		onResume: function() { console.log("resume"); },
-			// 		onPause: function() { console.log("pause"); }
+			// 		onStart: function() { //console.log("start"); },
+			// 		onSeek: function(a,b) { //console.log("seeked to"); //console.log(a); //console.log(b); },
+			// 		onBegin: function() { //console.log("begin"); },
+			// 		onStop: function() { //console.log("stop"); },
+			// 		onResume: function() { //console.log("resume"); },
+			// 		onPause: function() { //console.log("pause"); }
 			// 	}
 			// }).ipad();
 		</script>
