@@ -48,6 +48,20 @@
 		p.caption em {
 			display: block;
 		}
+		div.video_area {
+			position: relative;
+		}
+		div.video_area .video_player {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		div.video_area .overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+		}
 	</style>
 	
 	<!-- page title -->
@@ -97,17 +111,19 @@
 	
 		<h3>HTTP</h3>
 		
+		<div class="video_area">
 		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
-		<a  
-			 href="http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv"
-			 style="display:block;width:640px;height:360px"  
-			 id="player"> 
-		</a>
-		<div class="overlay"><textarea class="embed_text" style="margin: 0;overflow:hidden;"></textarea>
-	
+			<a  
+				 href="http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv"
+				 style="display:block;width:640px;height:360px"  
+				 id="player"
+				 class="video_player"> 
+			</a>
+			<div class="overlay"><textarea class="embed_text" style="margin: 0;overflow:hidden;"></textarea>
+		</div>
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
-			$f("player", "../flowplayer.commercial-3.2.7.swf", {
+			$f("player", {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
 				
 				// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
 				// 				},
@@ -200,11 +216,12 @@
 					onResume: function() { console.log("resume"); },
 					onPause: function() { console.log("pause"); console.log(this.getStatus()); console.log(this.getTime()); }
 				},
-				
+				screen: { bottom: 28},
 				plugins: {
 					controls: {
 						fullscreen : true,
 						bottom: 0,
+						height: 28,
 						autoHide: "never"
 					}
 				}
