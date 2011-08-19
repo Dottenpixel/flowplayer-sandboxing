@@ -8,8 +8,10 @@
 		include flowplayer JavaScript file that does  
 		Flash embedding and provides the Flowplayer API.
 	-->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 	<script type="text/javascript" src="flowplayer-3.2.6.min.js"></script>
 	<script type="text/javascript" src="flowplayer.ipad-3.2.2.min.js"></script>
+	<script type="text/javascript" src="http://static.flowplayer.org/js/flowplayer.embed-3.0.3.min.js"></script>
 	
 	<!-- some minimal styling, can be removed -->
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -21,9 +23,20 @@
 		#config h1{
 			font-size: 14px;
 		}
+		.overlay {
+			width: 640px;
+			height: 360px;
+		}
+		.overlay .embed_text {
+			width: 600px;
+			height: 300px;
+			padding: 0;
+			margin: 0;
+		}
 		p.field input[type=text] {
 			width: 500px;
 		}
+		p.field select,
 		p.field input {
 			position: absolute;
 			left: 200px;
@@ -45,6 +58,14 @@
 	<div id="config">
 		<h1>Config</h1>
 		<form action="#" method="get" accept-charset="utf-8">
+			<p class="field"><label for="i7">Site</label>
+					<select name="i7" id="i7" onchange="" size="1">
+						<option value="option1">unionbank.com</option>
+						<option value="option2">uboc.com</option>
+						<option value="option3">highmarkcapital.com</option>
+						<option value="option4">unionbankcareers.com</option>
+					</select>
+			</p>
 			<p class="field"><label for="i5">Width</label> <input type="text" name="i5" value="640" /></p>
 			<p class="field"><label for="i6">Height</label> <input type="text" name="i6" value="360" id="i6" /></p>
 
@@ -52,6 +73,7 @@
 			<p class="caption">Possible demo values: 
 				<em>rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
 				<em>http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
+				<em>http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv</em>
 			</p>
 			<p class="field">
 				<label for="i4a">RTMP</label> <input type="radio" name="i4" value="rtmp" id="i4a"/>
@@ -77,14 +99,15 @@
 		
 		<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
 		<a  
-			 href="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv"
+			 href="http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv"
 			 style="display:block;width:640px;height:360px"  
 			 id="player"> 
-		</a> 
+		</a>
+		<div class="overlay"><textarea class="embed_text" style="margin: 0;overflow:hidden;"></textarea>
 	
 		<!-- this will install flowplayer inside previous A- tag. -->
 		<script>
-			flowplayer("player", "../flowplayer.commercial-3.2.7.swf", {
+			$f("player", "../flowplayer.commercial-3.2.7.swf", {
 				
 				// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
 				// 				},
@@ -101,8 +124,8 @@
 
 					// default logo and its position, relative to video SWF
 					url: 'deploy/img/video_logo.png',
-					bottom: 10,
-					left: 10,
+					top: 10,
+					right: 15,
 					opacity: 0.4,
 
 					// for SWF-based logos you can supply a relative size (to make the logo larger in fullscreen)
@@ -128,35 +151,35 @@
 				},
 				
 				play: {
-
+				
 					/*
 						relative path to the play button, this can be a JPG, PNG or SWF file.
 						NOTE: the button can only be changed in the commercial versions
 					*/
 					url: 'img/video_loader_3d.png',
-
+				
 					// all display properties, except the z-index, can be modified in all versions
 					opacity: 0.8,
-
+				
 					// label text; by default there is no text
 					label: null,
-
+				
 					// label text at end of video clip
 					replayLabel: 'Play again',
-
+				
 					/*
 						progress indicator - this is shown while video is being loaded.
 						it is always in the same place as the play button.
 					*/
 					// how fast progress indicator fades out after video is loaded
 					fadeSpeed: 500,
-
+				
 					// how fast buffering animation rotates
 					rotateSpeed: 50
-
+				
 				},
 				
-				onLoad: function() { console.log("loaded"); },
+				onLoad: function() { console.log("loaded"); var cc=this.getClip(0); console.log(this.getParent()); console.log(cc); },
 				onMute: function() { console.log("mute"); },
 				onUnmute: function() { console.log("unmute"); },
 				onFullscreenExit: function() { console.log("fullscreen exit"); },
@@ -165,10 +188,15 @@
 				
 				clip: {
 					ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
-					onStart: function() { console.log("start"); },
-					onSeek: function(a,b) { console.log("seeked to"); console.log(a); console.log(b); },
-					onBegin: function() { console.log("begin"); },
-					onStop: function() { console.log("stop"); },
+					autoPlay : false,
+					autoBuffering : true,
+					bufferLength : 10,
+					onStart: function(c) { console.log("start");  },
+					onSeek: function(c,t) { console.log("seeked to"); console.log(c); console.log(t); },
+					onBeforeBegin: function(c) { var cc=c;console.log(cc.metaData) },
+					onMetaData: function(c){ console.log("metaData"); var cc=c;console.log(cc) },
+					onBegin: function(c) { console.log("begin"); console.log(c); },
+					onStop: function(c) { console.log("stop"); },
 					onResume: function() { console.log("resume"); },
 					onPause: function() { console.log("pause"); console.log(this.getStatus()); console.log(this.getTime()); }
 				},
@@ -176,13 +204,18 @@
 				plugins: {
 					controls: {
 						fullscreen : true,
-						autoHide: {
-							enabled: true,
-							fullscreenOnly: false
-						}
+						bottom: 0,
+						autoHide: "never"
 					}
 				}
-			}).ipad();
+			}).ipad(); //{simulateiDevice: true}
+			
+			// get the embedding code
+			var code = $f().embed().getEmbedCode();
+			
+			// place this code in our textarea
+			$(".overlay .embed_text").html( code );
+			
 		</script>
 
 		<h3>RTMP - Streaming</h3>
