@@ -13,6 +13,13 @@
 	<script type="text/javascript" src="flowplayer-3.2.6.min.js"></script>
 	<script type="text/javascript" src="flowplayer.ipad-3.2.2.js"></script>
 	<script type="text/javascript" src="http://static.flowplayer.org/js/flowplayer.embed-3.0.3.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		//this code is used simply for extract values out of the query string of the code demo
+		function _get(name)
+		{
+		  	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+			return match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : null;
+		}
 	</script>
 	<!-- some minimal styling, can be removed -->
 	<link rel="stylesheet" type="text/css" href="style.css"/>
