@@ -5,37 +5,48 @@ $.fn.makeVideo = function(o) {
 	$this.append(
 		$('<a>', {
 			"href" : o.videoURL,
-			"style" : "display:block;width:640px;height:360px",
 			"id" : playerID,
 			"name" : playerID,
 			"class" : "video_player"
+		}).css({
+			"display" : "block",
+			"width" : o.width,
+			"height" : o.height
 		})
 	);
 	
 	if(o.sharebar) {
 		$this.append(
 			$('<div>', {
-				"style" : "width:640px;height:360px",
 				"class" : "overlay"
-			}).append(
-				$('<a>', {
-					"href" : "#",
-					"text" : "CLOSE",
-					"class" : "close"
-				}),
-				$('<textarea>', {
-					"style" : "width:620px;height:300px,margin: 0;overflow:hidden;",
-					"rows" : "",
-					"cols" : ""
-				})
+			}).css({
+				"width" : o.width,
+				"height" : o.height
+				}).append(
+					$('<a>', {
+						"href" : "#",
+						"text" : "CLOSE",
+						"class" : "close"
+					}),
+					$('<textarea>', {
+						"rows" : "",
+						"cols" : ""
+					}).css({
+						"display" : "block",
+						"width" : o.width - 20,
+						"height" : o.height - 60,
+						"margin" : 0,
+						"overflow" : "hidden"
+					})
 			)
 		);
 		
 		$this.append(
 			$('<div>', {
-				"style" : "width:640px;",
 				"class" : "share_bar"
-			}).append(
+			}).css({
+				"width" : o.width
+				}).append(
 					$('<a>', {
 						"href" : "#",
 						"text" : "EMBED",
@@ -95,7 +106,7 @@ $.fn.makeVideo = function(o) {
 			linkUrl: 'http://flowplayer.org'
 		},
 		
-		//player level events
+		//player-level events
 		onLoad: function(c) { 
 			$(".debug_text").vidtrack("loaded");
 			var cc=this.getClip(0);
@@ -117,7 +128,7 @@ $.fn.makeVideo = function(o) {
 		},
 	
 		clip: {
-			ipadUrl : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
+			ipadUrl : o.mobileVideoURL,
 			autoPlay : false,
 			autoBuffering : true,
 			bufferLength : 10,
