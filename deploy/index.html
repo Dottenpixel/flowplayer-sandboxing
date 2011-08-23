@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 <!-- A minimal Flowplayer setup to get you started -->
   
 
@@ -12,9 +13,9 @@
 	<script type="text/javascript" src="flowplayer-3.2.6.min.js"></script>
 	<script type="text/javascript" src="flowplayer.ipad-3.2.2.min.js"></script>
 	<script type="text/javascript" src="http://static.flowplayer.org/js/flowplayer.embed-3.0.3.min.js"></script>
-	
+	</script>
 	<!-- some minimal styling, can be removed -->
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<style type="text/css" media="screen">
 		body {
 			margin: 0;
@@ -27,7 +28,10 @@
 			background: #ddd;
 			padding: 10px 10px 40px 10px;
 			float: right;
-			
+		}
+		@media screen and (max-width: 320px)
+		{
+			#config { display: none; }
 		}
 		#config h1{
 			font-size: 14px;
@@ -133,9 +137,9 @@
 	<div id="config">
 		<h1>Configuration</h1>
 		<div class="form">
-			<form action="#" method="get" accept-charset="utf-8">
-				<p class="field"><label for="i3">Auto play?</label> <input type="checkbox" name="i3" value="" id="i3" /></p>
-				<p class="field"><label for="i10">Display Share bar?</label> <input type="checkbox" name="i10" value="" id="i10" /></p>
+			<form action="" method="get" accept-charset="utf-8">
+				<p class="field"><label for="i3">Auto play?</label> <input type="checkbox" name="i3" value="true" id="i3" /></p>
+				<p class="field"><label for="i10">Display Share bar?</label> <input type="checkbox" name="i10" value="true" id="i10" /></p>
 				<p class="field"><label for="i7">Site</label>
 						<select name="i7" id="i7" onchange="" size="1">
 							<option value="option1">unionbank.com</option>
@@ -144,8 +148,8 @@
 							<option value="option4">unionbankcareers.com</option>
 						</select>
 				</p>
-				<p class="field"><label for="i9">Tracking Event ID</label> <input type="text" name="i9" value="012345678" /></p>
-				<p class="field"><label for="i5">Width</label> <input type="text" name="i5" value="640" /></p>
+				<p class="field"><label for="i9">Tracking Event ID</label> <input type="text" name="i9" id="i9" value="012345678" /></p>
+				<p class="field"><label for="i5">Width</label> <input type="text" name="i5" value="640" id="i5" /></p>
 				<p class="field"><label for="i6">Height</label> <input type="text" name="i6" value="360" id="i6" /></p>
 
 				<p class="field"><label for="i1">Default Video URL</label> <input type="text" name="i1" value="http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv" id="i1" /></p>
@@ -179,7 +183,7 @@
 		</div>
 		<div class="debug">
 			<h1>Tracking Calls</h1>
-			<textarea class="debug_text" style="margin: 0;overflow:hidden;"></textarea>
+			<textarea class="debug_text" style="margin: 0;overflow:hidden;" rows="" cols=""></textarea>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -496,6 +500,5 @@
 
 	
 	</div>
-	
 	
 </body></html>
