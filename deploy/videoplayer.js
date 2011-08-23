@@ -12,21 +12,43 @@ $.fn.makeVideo = function(o) {
 		})
 	);
 	
-	// <a  
-	// 	href="http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv"
-	// 	style="display:block;width:640px;height:360px"  
-	// 	id="vid_012345678"
-	// 	class="video_player"
-	// 	name="vid_012345678"> 
-	// </a>
-	// <div class="overlay" style="width:640px;height:360px" >
-	// 	<a class="close" href="#">close</a>
-	// 	<textarea style="width:620px;height:300px" style="margin: 0;overflow:hidden;"></textarea>
-	// </div>
-	// <div class="share_bar" style="width:640px;" >
-	// 	<a class="embed" href="#">EMBED</a>
-	// 	<a class="share" href="#">SHARE</a>
-	// </div>
+	if(o.sharebar) {
+		$this.append(
+			$('<div>', {
+				"style" : "width:640px;height:360px",
+				"class" : "overlay"
+			}).append(
+				$('<a>', {
+					"href" : "#",
+					"text" : "CLOSE",
+					"class" : "close"
+				}),
+				$('<textarea>', {
+					"style" : "width:620px;height:300px,margin: 0;overflow:hidden;",
+					"rows" : "",
+					"cols" : ""
+				})
+			)
+		);
+		
+		$this.append(
+			$('<div>', {
+				"style" : "width:640px;",
+				"class" : "share_bar"
+			}).append(
+					$('<a>', {
+						"href" : "#",
+						"text" : "EMBED",
+						"class" : "embed"
+					}),
+					$('<a>', {
+						"href" : "#",
+						"text" : "SHARE",
+						"class" : "share"
+					})
+				)
+		);
+	}
 	
 	
 	

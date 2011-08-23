@@ -155,7 +155,7 @@
 							<option value="option4">unionbankcareers.com</option>
 						</select>
 				</p>
-				<p class="field"><label for="i9">Tracking Event ID</label> <input type="text" name="i9" id="i9" value="012345678" /></p>
+				<p class="field"><label for="i9">Tracking Element ID</label> <input type="text" name="i9" id="i9" value="012345678" /></p>
 				<p class="field"><label for="i5">Width</label> <input type="text" name="i5" value="640" id="i5" /></p>
 				<p class="field"><label for="i6">Height</label> <input type="text" name="i6" value="360" id="i6" /></p>
 
@@ -176,15 +176,7 @@
 				<p class="caption">Possible demo values: 
 					<em>http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4</em>
 				</p>
-				<p>Mobile Video Protocol</p>
-				<p class="field">
-					<label for="i8a">RTMP</label> <input type="radio" name="i8" value="rtmp" id="i8a"/>
-				</p>
-				<p class="field">
-					<label for="i8b">HTTP</label> <input type="radio" name="i8" value="http" id="i8b"/>
-				</p>
-			
-
+				
 				<p class="field"><input type="submit" value="Continue &rarr;"></p>
 			</form>
 		</div>
@@ -266,7 +258,6 @@
 					$(".overlay").hide();
 				});
 			});
-			
 			$f("vid_012345678", {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
 				
 				// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
@@ -435,6 +426,25 @@
 				}
 			}).ipad(); //{simulateiDevice: true}
 			
+		</script>
+		<script src="videoplayer.js" type="text/javascript" charset="utf-8"></script>
+		
+		<div id="UNIQID" class="video_area"></div>
+		<script type="text/javascript">
+			(function(o){
+				o.videoProtocol = o.videoURL.substr(0,4);
+				$("#UNIQID").makeVideo(o);
+			})( //JSON Object tobe populated for configuration of each video player instance
+				{
+					"elementID" : _get("i9"),
+					"videoURL" : _get("i1"),
+					"autoPlay" : _get("i3"),
+					"width" : _get("i5"),
+					"height" : _get("i6"),
+					"sharebar" : _get("i10"),
+					"mobileVideoURL" : _get("i2")
+					
+				});
 		</script>
 
 		<!-- <h3>RTMP - Streaming</h3> -->
