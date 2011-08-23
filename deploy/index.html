@@ -382,9 +382,9 @@
 						var cc=c;//console.log(cc); 
 						var fd = c.fullDuration;
 						var cues = [
-							{ time:fd*.25*1000, name: "25%" }, 
-							{ time:fd*.5*1000, name: "50%" }, 
-							{ time:fd*.75*1000, name: "75%" }
+							{ time:fd*.25*c.cuepointMultiplier, name: "25%" }, 
+							{ time:fd*.5*c.cuepointMultiplier, name: "50%" }, 
+							{ time:fd*.75*c.cuepointMultiplier, name: "75%" }
 						];
 
 						c.onCuepoint(
