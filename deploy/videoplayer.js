@@ -94,62 +94,26 @@ $.fn.makeVideo = function(o) {
 			// for commercial versions you can specify where the user is redirected when the logo is clicked
 			linkUrl: 'http://flowplayer.org'
 		},
-	
-		// play: {
-		// 
-		// 	/*
-		// 		relative path to the play button, this can be a JPG, PNG or SWF file.
-		// 		NOTE: the button can only be changed in the commercial versions
-		// 	*/
-		// 	url: 'img/video_loader_3d.png',
-		// 
-		// 	// all display properties, except the z-index, can be modified in all versions
-		// 	opacity: 0.8,
-		// 
-		// 	// label text; by default there is no text
-		// 	label: null,
-		// 
-		// 	// label text at end of video clip
-		// 	replayLabel: 'Play again',
-		// 
-		// 	/*
-		// 		progress indicator - this is shown while video is being loaded.
-		// 		it is always in the same place as the play button.
-		// 	*/
-		// 	// how fast progress indicator fades out after video is loaded
-		// 	fadeSpeed: 500,
-		// 
-		// 	// how fast buffering animation rotates
-		// 	rotateSpeed: 50
-		// 
-		// },
-	
+		
+		//player level events
 		onLoad: function(c) { 
 			$(".debug_text").vidtrack("loaded");
-			//console.log("loaded"); 
 			var cc=this.getClip(0);
-			//console.log(c);
-			//console.log(cc);
 		},
 		onMute: function() { 
 			$(".debug_text").vidtrack("mute");
-			//console.log("mute"); 
 		},
 		onUnmute: function() { 
 			$(".debug_text").vidtrack("unmute"); 
-			//console.log("unmute"); 
 		},
 		onFullscreenExit: function() { 
 			$(".debug_text").vidtrack("fullscreen_exit");
-			//console.log("fullscreen exit"); 
 		},
 		onFullscreen: function() { 
 			$(".debug_text").vidtrack("fullscreen");
-			//console.log("fullscreen"); 
 		},
 		onVolume: function(level) { 
 			$(".debug_text").vidtrack("volume_"+level);
-			//console.log("volume level is now " + level); 
 		},
 	
 		clip: {
@@ -158,20 +122,14 @@ $.fn.makeVideo = function(o) {
 			autoBuffering : true,
 			bufferLength : 10,
 			onStart: function(c) { 
-				//console.log("start");
 			},
 			onSeek: function(c,t) { 
 				$(".debug_text").vidtrack("seek_"+t); 
-				//console.log("seeked to"); 
-				//console.log(c);
-				//console.log(t); 
 			},
 			onBeforeBegin: function(c) { 
-				var cc=c;
-				//console.log(cc.metaData) 
 			},
 			onMetaData: function(c){ //console.log("metaData"); 
-				var cc=c;//console.log(cc); 
+				var cc=c;
 				var fd = c.fullDuration;
 				var cues = [
 					{ time:fd*.25*c.cuepointMultiplier, name: "25%" }, 
@@ -189,26 +147,18 @@ $.fn.makeVideo = function(o) {
 				 );
 			},
 			onBegin: function(c) { 
-				//console.log("begin");
-				//console.log(c);
 			},
 			onStop: function(c) { 
 				$(".debug_text").vidtrack("stop"); 
-				//console.log("stop"); 
 			},
 			onResume: function() { 
 				$(".debug_text").vidtrack("play");
-				//console.log("resume");
 			},
 			onPause: function() { 
 				$(".debug_text").vidtrack("pause");
-				//console.log("pause");
-				//console.log(this.getStatus());
-				//console.log(this.getTime());
 			},
 			onFinish: function(c) {
 				$(".debug_text").vidtrack("finish");
-				//console.log("finish");
 			}
 		},
 		plugins: {
