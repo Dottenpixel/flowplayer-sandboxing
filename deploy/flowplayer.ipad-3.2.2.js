@@ -623,7 +623,7 @@ $f.addPlugin("ipad", function(options) {
 						'volumechange',
 						'waiting'];
 		var eventsLogger = function(e) {
-			console.log("Got event "+ e.type, e);
+			log("Got event "+ e.type, e);
 		}
 						
 		for ( var i = 0; i < events.length; i++ )
