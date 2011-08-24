@@ -2,6 +2,35 @@ $.fn.makeVideo = function(o) {
 	var $this = $(this);
 	console.log(o);
 	var playerID = "vid"+o.elementID;
+	var isiDevice = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+	
+	var siteKeys = [
+		{ "site" : "creativelift.net", 		"fpkey" : "#@905cc47e8164939b12d" },
+		{ "site" : "unionbank.com", 		"fpkey" : "#@0fe097db9d8cebcca91" },
+		{ "site" : "uboc.com", 				"fpkey" : "#@ed7621c5ad8cbbd051e" },
+		{ "site" : "highmarkcapital.com", 	"fpkey" : "#@6f32f5dac6c63c08df5" },
+		{ "site" : "unionbankcareers.com", 	"fpkey" : "#@762506d39a168884c9b" }
+	];
+	
+	//function that is called on every video player event
+	var vidtrack = function( e ) {
+		var c = $(".debug_text").text();
+		var t = new Date().getTime().toString() + " >> " + o.elementID + " >> " + e + "\n";
+		var cc = c + t;
+		$(".debug_text").text(cc);
+	};
+
+	vidtrack("isiIdevice : " + isiDevice);
+
+
+	//determine key
+	var playerKey = function(){
+		for( i in siteKeys ) {
+			if ( RegExp(siteKeys[i].site, "i").test(document.location.hostname) ) return siteKeys[i].fpkey;
+		}
+		return "#@905cc47e8164939b12d"; //default key
+	}
+	console.log(playerKey());
 	$this.append(
 		$('<a>', {
 			"href" : o.videoURL,
@@ -47,6 +76,9 @@ $.fn.makeVideo = function(o) {
 			}).css({
 				"width" : o.width
 				}).append(
+					$("<span>", {
+						"class" : "logo"
+					}),
 					$('<a>', {
 						"href" : "#",
 						"text" : "EMBED",
@@ -69,7 +101,7 @@ $.fn.makeVideo = function(o) {
 		// 				},
 	
 		// commercial version requires product key
-		key: '#@905cc47e8164939b12d',
+		key: playerKey(),
 	
 		/*
 			logo can a JPG, PNG or SWF file.
@@ -108,23 +140,23 @@ $.fn.makeVideo = function(o) {
 		
 		//player-level events
 		onLoad: function(c) { 
-			$(".debug_text").vidtrack("loaded");
+			vidtrack("loaded");
 			var cc=this.getClip(0);
 		},
 		onMute: function() { 
-			$(".debug_text").vidtrack("mute");
+			vidtrack("mute");
 		},
 		onUnmute: function() { 
-			$(".debug_text").vidtrack("unmute"); 
+			vidtrack("unmute"); 
 		},
 		onFullscreenExit: function() { 
-			$(".debug_text").vidtrack("fullscreen_exit");
+			vidtrack("fullscreen_exit");
 		},
 		onFullscreen: function() { 
-			$(".debug_text").vidtrack("fullscreen");
+			vidtrack("fullscreen");
 		},
 		onVolume: function(level) { 
-			$(".debug_text").vidtrack("volume_"+level);
+			vidtrack("volume_"+level);
 		},
 	
 		clip: {
@@ -135,7 +167,7 @@ $.fn.makeVideo = function(o) {
 			onStart: function(c) { 
 			},
 			onSeek: function(c,t) { 
-				$(".debug_text").vidtrack("seek_"+t); 
+				vidtrack("seek_"+t); 
 			},
 			onBeforeBegin: function(c) { 
 			},
@@ -153,23 +185,23 @@ $.fn.makeVideo = function(o) {
 					cues,
 					// this function is triggered when a cuepoint is reached
 					function(clip, cuepoint) {
-						$(".debug_text").vidtrack("progress_"+cuepoint.name);
+						vidtrack("progress_"+cuepoint.name);
 					}
 				 );
 			},
 			onBegin: function(c) { 
 			},
 			onStop: function(c) { 
-				$(".debug_text").vidtrack("stop"); 
+				vidtrack("stop"); 
 			},
 			onResume: function() { 
-				$(".debug_text").vidtrack("play");
+				vidtrack("play");
 			},
 			onPause: function() { 
-				$(".debug_text").vidtrack("pause");
+				vidtrack("pause");
 			},
 			onFinish: function(c) {
-				$(".debug_text").vidtrack("finish");
+				vidtrack("finish");
 			}
 		},
 		plugins: {
