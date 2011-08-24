@@ -102,7 +102,7 @@ $f.addPlugin("ipad", function(options) {
 		simulateiDevice: false,
 		controlsSizeRatio: 1.5,
 		controls: true,
-		debug: false,
+		debug: true,
 		validExtensions: /mov|m4v|mp4|avi/gi
 	};
 
