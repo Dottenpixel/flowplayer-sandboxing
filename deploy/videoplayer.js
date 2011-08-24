@@ -1,5 +1,7 @@
 $.fn.makeVideo = function(o) {
 	var $this = $(this);
+	o.videoProtocol = o.videoURL.substr(0,4);
+	
 	console.log(o);
 	var playerID = "vid"+o.elementID;
 	var isiDevice = /iPad|iPhone|iPod/i.test(navigator.userAgent);
@@ -30,7 +32,7 @@ $.fn.makeVideo = function(o) {
 		}
 		return "#@905cc47e8164939b12d"; //default key
 	}
-	console.log(playerKey());
+
 	$this.append(
 		$('<a>', {
 			"href" : o.videoURL,
@@ -93,9 +95,68 @@ $.fn.makeVideo = function(o) {
 		);
 	}
 	
+	var playerClipOptions = {
+		provider : o.videoProtocol,
+		ipadUrl : o.mobileVideoURL,
+		autoPlay : o.autoPlay,
+		autoBuffering : true,
+		bufferLength : 10,
+		onStart: function(c) { 
+		},
+		onSeek: function(c,t) { 
+			vidtrack("seek_"+t); 
+		},
+		onBeforeBegin: function(c) { 
+		},
+		onMetaData: function(c){ //console.log("metaData"); 
+			var cc=c;
+			var fd = c.fullDuration;
+			var cues = [
+				{ time:fd*.25*c.cuepointMultiplier, name: "25%" }, 
+				{ time:fd*.5*c.cuepointMultiplier, name: "50%" }, 
+				{ time:fd*.75*c.cuepointMultiplier, name: "75%" }
+			];
+
+			c.onCuepoint(
+				// each integer represents milliseconds in the timeline
+				cues,
+				// this function is triggered when a cuepoint is reached
+				function(clip, cuepoint) {
+					vidtrack("progress_"+cuepoint.name);
+				}
+			 );
+		},
+		onBegin: function(c) { 
+		},
+		onStop: function(c) { 
+			vidtrack("stop"); 
+		},
+		onResume: function() { 
+			vidtrack("play");
+		},
+		onPause: function() { 
+			vidtrack("pause");
+		},
+		onFinish: function(c) {
+			vidtrack("finish");
+		}
+	};
 	
+	var playerPluginOptions = {
+		controls: {
+			fullscreen : true,
+			bottom: 0,
+			autoHide: "always"
+		}
+	};
 	
-	$f(playerID, {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
+	if (o.videoProtocol == "rtmp") {
+		// here is our rtpm plugin configuration
+		playerPluginOptions.akamai = { url: '../flowplayer.akamai-3.2.0.swf' },
+		playerPluginOptions.rtmp = { url: '../flowplayer.rtmp-3.2.3.swf' }
+	};
+	
+	$f(playerID, {src: "../flowplayer.commercial-3.2.7.swf", wmode: "opaque"}, {
 	
 		// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
 		// 				},
@@ -135,7 +196,7 @@ $.fn.makeVideo = function(o) {
 			fadeSpeed: 0,
 
 			// for commercial versions you can specify where the user is redirected when the logo is clicked
-			linkUrl: 'http://flowplayer.org'
+			linkUrl: 'http://' + document.location.hostname
 		},
 		
 		//player-level events
@@ -159,57 +220,7 @@ $.fn.makeVideo = function(o) {
 			vidtrack("volume_"+level);
 		},
 	
-		clip: {
-			ipadUrl : o.mobileVideoURL,
-			autoPlay : false,
-			autoBuffering : true,
-			bufferLength : 10,
-			onStart: function(c) { 
-			},
-			onSeek: function(c,t) { 
-				vidtrack("seek_"+t); 
-			},
-			onBeforeBegin: function(c) { 
-			},
-			onMetaData: function(c){ //console.log("metaData"); 
-				var cc=c;
-				var fd = c.fullDuration;
-				var cues = [
-					{ time:fd*.25*c.cuepointMultiplier, name: "25%" }, 
-					{ time:fd*.5*c.cuepointMultiplier, name: "50%" }, 
-					{ time:fd*.75*c.cuepointMultiplier, name: "75%" }
-				];
-
-				c.onCuepoint(
-					// each integer represents milliseconds in the timeline
-					cues,
-					// this function is triggered when a cuepoint is reached
-					function(clip, cuepoint) {
-						vidtrack("progress_"+cuepoint.name);
-					}
-				 );
-			},
-			onBegin: function(c) { 
-			},
-			onStop: function(c) { 
-				vidtrack("stop"); 
-			},
-			onResume: function() { 
-				vidtrack("play");
-			},
-			onPause: function() { 
-				vidtrack("pause");
-			},
-			onFinish: function(c) {
-				vidtrack("finish");
-			}
-		},
-		plugins: {
-			controls: {
-				fullscreen : true,
-				bottom: 0,
-				autoHide: "always"
-			}
-		}
+		clip: playerClipOptions,
+		plugins: playerPluginOptions
 	}).ipad(); //{simulateiDevice: true}
 };
