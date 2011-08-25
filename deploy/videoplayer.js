@@ -144,6 +144,7 @@ $.fn.makeVideo = function(o) {
 	
 	var playerPluginOptions = {
 		controls: {
+			url : "flowplayer.controls-3.2.5.swf",
 			fullscreen : true,
 			bottom: 0,
 			autoHide: "always"
@@ -156,7 +157,7 @@ $.fn.makeVideo = function(o) {
 		playerPluginOptions.rtmp = { url: '../flowplayer.rtmp-3.2.3.swf' }
 	};
 	
-	$f(playerID, {src: "../flowplayer.commercial-3.2.7.swf", wmode: "opaque"}, {
+	$f(playerID, {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
 	
 		// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
 		// 				},
@@ -170,7 +171,6 @@ $.fn.makeVideo = function(o) {
 			the url must be absolute or relative to the flowplayer SWF
 		*/
 		logo: {
-
 			// default logo and its position, relative to video SWF
 			url: 'deploy/img/video_logo.png',
 			top: 10,
