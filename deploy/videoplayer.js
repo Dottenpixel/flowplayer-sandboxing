@@ -157,6 +157,44 @@ $.fn.makeVideo = function(o) {
 		playerPluginOptions.rtmp = { url: '../flowplayer.rtmp-3.2.3.swf' }
 	};
 	
+	$(".share_bar a", $this).bind("click", function(e){
+		e.preventDefault();
+		//reset
+		$(".overlay textarea", $this).html("");
+
+		if ( $(this).hasClass("embed") ) {
+			// get the embedding code
+			var code = $f(playerID).embed().getEmbedCode();
+
+			// place this code in our textarea
+			$(".overlay textarea", $this).html( code );
+		}
+		
+		if ( $(this).hasClass("share") ) {
+			var h = document.location.href;
+			var hc = h.indexOf("#") > 0 ? h.replace( h.substring(h.indexOf("#")), "") : h;
+			$(".overlay textarea", $this).html( hc + "#" + $(".share_bar", $this).siblings(".video_player").attr("name") );
+		}
+		
+		if ( $(this).hasClass("engaged") ) {
+			$(".share_bar a", $this).removeClass("engaged");
+			$(".overlay", $this).hide();
+			$(".share_bar .close", $this).hide();
+		} else {
+			$(".share_bar a", $this).removeClass("engaged");
+			$(this).addClass("engaged");
+			$(".overlay .embed_text", $this).show();
+			$(".overlay", $this).show();
+			$(".share_bar .close", $this).show();
+		}
+	});
+	
+	$(".overlay .close", $this).bind("click", function(e){
+		e.preventDefault();
+		$(".share_bar a", $this).removeClass("engaged");
+		$(".overlay", $this).hide();
+	});
+	
 	$f(playerID, {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
 	
 		// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'

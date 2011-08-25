@@ -182,45 +182,7 @@
 		
 		<script>
 			
-			$(document).ready(function(){
-				$(".share_bar a").bind("click", function(e){
-					e.preventDefault();
-					//reset
-					$(".overlay textarea").html("");
-
-					if ( $(this).hasClass("embed") ) {
-						// get the embedding code
-						var code = $f(0).embed().getEmbedCode();
-
-						// place this code in our textarea
-						$(".overlay textarea").html( code );
-					}
-					
-					if ( $(this).hasClass("share") ) {
-						var h = document.location.href;
-						var hc = h.indexOf("#") > 0 ? h.replace( h.substring(h.indexOf("#")), "") : h;
-						$(".overlay textarea").html( hc + "#" + $(".share_bar").siblings(".video_player").attr("name") );
-					}
-					
-					if ( $(this).hasClass("engaged") ) {
-						$(".share_bar a").removeClass("engaged");
-						$(".overlay").hide();
-						$(".share_bar .close").hide();
-					} else {
-						$(".share_bar a").removeClass("engaged");
-						$(this).addClass("engaged");
-						$(".overlay .embed_text").show();
-						$(".overlay").show();
-						$(".share_bar .close").show();
-					}
-				});
-				
-				$(".overlay .close").bind("click", function(e){
-					e.preventDefault();
-					$(".share_bar a").removeClass("engaged");
-					$(".overlay").hide();
-				});
-			});
+			
 			
 			
 		</script>
@@ -229,33 +191,30 @@
 		<div id="UNIQID" class="video_area"></div>
 		<div id="UNIQID2" class="video_area"></div>
 		<script type="text/javascript">
-			(function(o){
-				$("#UNIQID").makeVideo(o);
-			})( //JSON Object tobe populated for configuration of each video player instance
-				{
-					"elementID" : _get("i9"),
-					"videoURL" : _get("i1"),
-					"autoPlay" : _get("i3") == "true" ? true : false,
-					"width" : _get("i5"),
-					"height" : _get("i6"),
-					"sharebar" : _get("i10") == "true" ? true : false,
-					"mobileVideoURL" : _get("i2")
-					
-				});
-				
-			(function(o){
-				$("#UNIQID2").makeVideo(o);
-			})( //JSON Object tobe populated for configuration of each video player instance
-				{
-					"elementID" : "abcdef",
-					"videoURL" : "rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv",
-					"autoPlay" : false,
-					"width" : "640",
-					"height" : "360",
-					"sharebar" : true,
-					"mobileVideoURL" : "http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v"
+				$("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
+					{
+						"elementID" : _get("i9"),
+						"videoURL" : _get("i1"),
+						"autoPlay" : _get("i3") == "true" ? true : false,
+						"width" : _get("i5"),
+						"height" : _get("i6"),
+						"sharebar" : _get("i10") == "true" ? true : false,
+						"mobileVideoURL" : _get("i2")
 
-				});
+					}
+				);
+
+				$("#UNIQID2").makeVideo(//JSON Object tobe populated for configuration of each video player instance
+					{
+						"elementID" : "abcdef",
+						"videoURL" : "rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv",
+						"autoPlay" : false,
+						"width" : "640",
+						"height" : "360",
+						"sharebar" : true,
+						"mobileVideoURL" : "http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v"
+					}
+				);
 		</script>
 
 	</div>
