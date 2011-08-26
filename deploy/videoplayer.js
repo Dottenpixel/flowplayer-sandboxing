@@ -3,7 +3,7 @@ $.fn.makeVideo = function(o) {
 	o.videoProtocol = o.videoURL.substr(0,4);
 	
 	console.log(o);
-	var playerID = "vid"+o.elementID;
+	var playerID = "vid_"+o.elementID;
 	var isiDevice = /iPad|iPhone|iPod/i.test(navigator.userAgent);
 	
 	var siteKeys = [
@@ -59,6 +59,9 @@ $.fn.makeVideo = function(o) {
 						"text" : "CLOSE",
 						"class" : "close"
 					}),
+					$('<h1>', {
+						"text" : "HEADLINE"
+					}),
 					$('<textarea>', {
 						"rows" : "",
 						"cols" : ""
@@ -68,6 +71,9 @@ $.fn.makeVideo = function(o) {
 						"height" : o.height - 60,
 						"margin" : 0,
 						"overflow" : "hidden"
+					}),
+					$('<div>', {
+						"class" : "content"
 					})
 			)
 		);
@@ -173,7 +179,27 @@ $.fn.makeVideo = function(o) {
 		if ( $(this).hasClass("share") ) {
 			var h = document.location.href;
 			var hc = h.indexOf("#") > 0 ? h.replace( h.substring(h.indexOf("#")), "") : h;
-			$(".overlay textarea", $this).html( hc + "#" + $(".share_bar", $this).siblings(".video_player").attr("name") );
+			var shareURL = hc + "#" + playerID;
+			
+			$(".overlay textarea", $this).html( shareURL );
+			$(".overlay .content", $this).append(
+				$("<div>", {
+					"class" : "addthis_toolbox addthis_default_style addthis_32x32_style"
+				}).append(
+					$("<span>", {
+						"class" : "label",
+						"text" : "fii"
+					})
+					)
+			);
+			$.each(["facebook","twitter","linkedin"], function(i,v) {
+				$(".addthis_toolbox", $this).append(
+					$("<a>", {
+						"class" : "addthis_button_"+v
+					})
+				)
+			})			
+			addthis.toolbox( $(".addthis_toolbox", $this).get(0), {}, { "url" : shareURL });
 		}
 		
 		if ( $(this).hasClass("engaged") ) {
