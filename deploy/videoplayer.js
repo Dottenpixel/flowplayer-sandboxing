@@ -163,6 +163,37 @@ $.fn.makeVideo = function(o) {
 		playerPluginOptions.rtmp = { url: '../flowplayer.rtmp-3.2.3.swf' }
 	};
 	
+	var playerLogoOptions = {
+		// default logo and its position, relative to video SWF
+		url: 'deploy/img/video_logo.png',
+		top: 10,
+		right: 15,
+		opacity: 0.4,
+
+		// for SWF-based logos you can supply a relative size (to make the logo larger in fullscreen)
+		// width: '6.5%',
+		// height: '6.5%',
+
+		// if set to false, then the logo is also shown in non-fullscreen mode
+		fullscreenOnly: false,
+
+		// time to display logo (in seconds). 0 = show forever
+		displayTime: 0,
+
+		/*
+			if displayTime > 0 then this specifies the time it will take for
+			the logo to fade out. this happens internally by changing the opacity
+			property from its initial value to full transparency.
+			value is given in milliseconds.
+		*/
+		fadeSpeed: 0,
+
+	};
+	
+	// for commercial versions you can specify where the user is redirected when the logo is clicked
+	if (o.logoLink) playerLogoOptions.linkUrl = o.logoLink;
+	
+	
 	$(".share_bar a.button", $this).bind("click", function(e){
 		e.preventDefault();
 		//reset
@@ -235,34 +266,7 @@ $.fn.makeVideo = function(o) {
 			NOTE: the logo can only be changed in commercial versions
 			the url must be absolute or relative to the flowplayer SWF
 		*/
-		logo: {
-			// default logo and its position, relative to video SWF
-			url: 'deploy/img/video_logo.png',
-			top: 10,
-			right: 15,
-			opacity: 0.4,
-
-			// for SWF-based logos you can supply a relative size (to make the logo larger in fullscreen)
-			// width: '6.5%',
-			// height: '6.5%',
-
-			// if set to false, then the logo is also shown in non-fullscreen mode
-			fullscreenOnly: false,
-
-			// time to display logo (in seconds). 0 = show forever
-			displayTime: 0,
-
-			/*
-				if displayTime > 0 then this specifies the time it will take for
-				the logo to fade out. this happens internally by changing the opacity
-				property from its initial value to full transparency.
-				value is given in milliseconds.
-			*/
-			fadeSpeed: 0,
-
-			// for commercial versions you can specify where the user is redirected when the logo is clicked
-			linkUrl: 'http://' + document.location.hostname
-		},
+		logo: playerLogoOptions,
 		
 		//player-level events
 		onLoad: function(c) { 
