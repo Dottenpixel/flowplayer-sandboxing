@@ -51,7 +51,7 @@ $.fn.makeVideo = function(o) {
 			$('<div>', {
 				"class" : "overlay"
 			}).css({
-				"width" : o.width,
+				"width" : o.width - 20,
 				"height" : o.height
 				}).append(
 					$('<a>', {
@@ -67,10 +67,9 @@ $.fn.makeVideo = function(o) {
 						"cols" : ""
 					}).css({
 						"display" : "block",
-						"width" : o.width - 20,
-						"height" : o.height - 60,
-						"margin" : 0,
-						"overflow" : "hidden"
+						"width" : o.width - 60,
+						"height" : 60,
+						"margin" : 0
 					}),
 					$('<div>', {
 						"class" : "content"
@@ -84,18 +83,19 @@ $.fn.makeVideo = function(o) {
 			}).css({
 				"width" : o.width
 				}).append(
-					$("<span>", {
+					$("<a>", {
+						"href" : "#",
 						"class" : "logo"
 					}),
 					$('<a>', {
 						"href" : "#",
 						"text" : "EMBED",
-						"class" : "embed"
+						"class" : "button embed"
 					}),
 					$('<a>', {
 						"href" : "#",
 						"text" : "SHARE",
-						"class" : "share"
+						"class" : "button share"
 					})
 				)
 		);
@@ -163,16 +163,16 @@ $.fn.makeVideo = function(o) {
 		playerPluginOptions.rtmp = { url: '../flowplayer.rtmp-3.2.3.swf' }
 	};
 	
-	$(".share_bar a", $this).bind("click", function(e){
+	$(".share_bar a.button", $this).bind("click", function(e){
 		e.preventDefault();
 		//reset
-		$(".overlay textarea", $this).html("");
-
+		$(".overlay .content", $this).html("");
+		
 		if ( $(this).hasClass("embed") ) {
 			// get the embedding code
 			var code = $f(playerID).embed().getEmbedCode();
 
-			// place this code in our textarea
+			$(".overlay h1").text("Embed this video:");
 			$(".overlay textarea", $this).html( code );
 		}
 		
@@ -181,6 +181,7 @@ $.fn.makeVideo = function(o) {
 			var hc = h.indexOf("#") > 0 ? h.replace( h.substring(h.indexOf("#")), "") : h;
 			var shareURL = hc + "#" + playerID;
 			
+			$(".overlay h1").text("Link to this video:");
 			$(".overlay textarea", $this).html( shareURL );
 			$(".overlay .content", $this).append(
 				$("<div>", {
@@ -188,7 +189,7 @@ $.fn.makeVideo = function(o) {
 				}).append(
 					$("<span>", {
 						"class" : "label",
-						"text" : "fii"
+						"text" : "Share this video:"
 					})
 					)
 			);

@@ -1,7 +1,7 @@
 
 body {
 	background-color:#fff;	
-	font-family:"Lucida Grande","bitstream vera sans","trebuchet ms",verdana,arial;
+	font-family: Arial, Helvetica, sans-serif;
 	text-align:center;
 }
 
@@ -14,21 +14,6 @@ body {
 	border:2px solid #fff;
 	outline:1px solid #ccc;
 	text-align:left;
-}
-
-h1, h2 {
-	letter-spacing:-1px;
-	color:#2D5AC3;
-	font-weight:normal;		
-	margin-bottom:-10px;
-}
-
-h1 {
-	font-size:22px;
-}
-
-h2 {
-	font-size:18px;
 }
 
 .less {
