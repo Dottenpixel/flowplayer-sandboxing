@@ -4,7 +4,7 @@ $.fn.makeVideo = function(o) {
 	
 	console.log(o);
 	var playerID = "vid_"+o.elementID;
-	var isiDevice = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+	var isiDevice = (/iPad|iPhone|iPod/i.test(navigator.userAgent));
 	
 	var siteKeys = [
 		{ "site" : "creativelift.net", 		"fpkey" : "#@905cc47e8164939b12d" },
@@ -52,7 +52,7 @@ $.fn.makeVideo = function(o) {
 				"class" : "overlay"
 			}).css({
 				"width" : o.width - 20,
-				"height" : o.height
+				"height" : isiDevice ? "" : o.height
 				}).append(
 					$('<a>', {
 						"href" : "#",
@@ -79,12 +79,12 @@ $.fn.makeVideo = function(o) {
 		
 		$this.append(
 			$('<div>', {
-				"class" : "share_bar"
+				"class" : "share_bar" 
 			}).css({
 				"width" : o.width
 				}).append(
 					$("<a>", {
-						"href" : "#",
+						"href" : o.logoLink,
 						"class" : "logo"
 					}),
 					$('<a>', {
@@ -99,6 +99,21 @@ $.fn.makeVideo = function(o) {
 					})
 				)
 		);
+	}
+	//simplify some sub-components for use later in script
+	var ol = $(".overlay", $this);
+	var sb = $(".share_bar", $this);
+	
+	
+	//adjust some parameters on sub-components if on iOS device
+	if(isiDevice) {
+		$(".share_bar, .overlay", $this).addClass("iOS");
+		ol.insertAfter(sb);
+		$(".close", ol).insertAfter( $(".content", ol) );
+		ol.css({
+		//	"height" : "auto"
+		});
+		
 	}
 	
 	var playerClipOptions = {
@@ -236,21 +251,19 @@ $.fn.makeVideo = function(o) {
 		
 		if ( $(this).hasClass("engaged") ) {
 			$(".share_bar a", $this).removeClass("engaged");
-			$(".overlay", $this).hide();
-			$(".share_bar .close", $this).hide();
+			$(".overlay", $this).slideUp();
 		} else {
 			$(".share_bar a", $this).removeClass("engaged");
 			$(this).addClass("engaged");
 			$(".overlay .embed_text", $this).show();
-			$(".overlay", $this).show();
-			$(".share_bar .close", $this).show();
+			$(".overlay", $this).slideDown();
 		}
 	});
 	
 	$(".overlay .close", $this).bind("click", function(e){
 		e.preventDefault();
-		$(".share_bar a", $this).removeClass("engaged");
-		$(".overlay", $this).hide();
+		$("a", sb).removeClass("engaged");
+		ol.slideUp();
 	});
 	
 	$f(playerID, {src: "../flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
