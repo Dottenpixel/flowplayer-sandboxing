@@ -36,6 +36,7 @@
 			background: #ddd;
 			padding: 10px 10px 40px 10px;
 			float: right;
+			display: none;
 		}
 		@media screen and (max-width: 900px)
 		{
@@ -237,7 +238,7 @@
 		<script>
 			
 			$(document).ready(function(){
-				if(!_get("i1")) $("form").eq(0).submit();
+				//if(!_get("i1")) $("form").eq(0).submit();
 			});
 			
 			
@@ -247,31 +248,42 @@
 		<div id="UNIQID" class="video_area"></div>
 		<div id="UNIQID2" class="video_area"></div>
 		<script type="text/javascript">
-				$("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
-					{
-						"elementID" : _get("i9"),
-						"videoURL" : _get("i1"),
-						"autoPlay" : _get("i3") == "true" ? true : false,
-						"width" : _get("i5"),
-						"height" : _get("i6"),
-						"sharebar" : _get("i10") == "true" ? true : false,
-						"mobileVideoURL" : _get("i2"),
-						"logoLink" : _get("i8")
+				// $("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
+				// 					{
+				// 						"elementID" : _get("i9"),
+				// 						"videoURL" : _get("i1"),
+				// 						"autoPlay" : _get("i3") == "true" ? true : false,
+				// 						"width" : _get("i5"),
+				// 						"height" : _get("i6"),
+				// 						"sharebar" : _get("i10") == "true" ? true : false,
+				// 						"mobileVideoURL" : _get("i2"),
+				// 						"logoLink" : _get("i8")
+				// 
+				// 					}
+				// 				);
 
-					}
-				);
-
-				// $("#UNIQID2").makeVideo(//JSON Object tobe populated for configuration of each video player instance
-				// 	{
-				// 		"elementID" : "abcdef",
-				// 		"videoURL" : "rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv",
-				// 		"autoPlay" : false,
-				// 		"width" : "640",
-				// 		"height" : "360",
-				// 		"sharebar" : true,
-				// 		"mobileVideoURL" : "http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v"
-				// 	}
-				// );
+			// $("#UNIQID2").makeVideo(//JSON Object tobe populated for configuration of each video player instance
+			// 				{
+			// 					"elementID" : "abcdef",
+			// 					"videoURL" : "rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv",
+			// 					"autoPlay" : false,
+			// 					"width" : "640",
+			// 					"height" : "360",
+			// 					"sharebar" : true,
+			// 					"mobileVideoURL" : "http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v"
+			// 				}
+			// 			);
+			$("#UNIQID2").makeVideo(//JSON Object tobe populated for configuration of each video player instance
+				{
+					"elementID" : "abcdef",
+					"videoURL" : "http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv",
+					"autoPlay" : false,
+					"width" : "640",
+					"height" : "360",
+					"sharebar" : true,
+					"mobileVideoURL" : "http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v"
+				}
+			);
 		</script>
 
 	</div>

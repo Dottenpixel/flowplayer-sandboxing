@@ -2,7 +2,7 @@ $.fn.makeVideo = function(o) {
 	var $this = $(this);
 	o.videoProtocol = o.videoURL.substr(0,4);
 	
-	console.log(o);
+	//console.log(o);
 	var playerID = "vid_"+o.elementID;
 	var isiDevice = (/iPad|iPhone|iPod/i.test(navigator.userAgent));
 	
@@ -201,7 +201,7 @@ $.fn.makeVideo = function(o) {
 			property from its initial value to full transparency.
 			value is given in milliseconds.
 		*/
-		fadeSpeed: 0,
+		fadeSpeed: 0
 
 	};
 	
