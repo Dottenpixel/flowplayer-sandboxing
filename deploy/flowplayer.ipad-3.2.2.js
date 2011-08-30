@@ -260,6 +260,7 @@ $f.addPlugin("ipad", function(options) {
 			var autoPlay 		 = true;
 
 			log("Calling play() " + clip, clip);
+			
 
 			if ( inStream ) {
 				log("ERROR: inStream clips not yet supported");
@@ -621,7 +622,9 @@ $f.addPlugin("ipad", function(options) {
 						'suspend',
 					//	'timeupdate',
 						'volumechange',
-						'waiting'];
+						'waiting',
+						'webkitendfullscreen',
+						'webkitbeginfullscreen'];
 		var eventsLogger = function(e) {
 			log("Got event "+ e.type, e);
 
@@ -779,7 +782,15 @@ $f.addPlugin("ipad", function(options) {
 		};
 		video.addEventListener('volumechange', onVolumeChange, false);
 		
-	
+		var onFullScreenEnter = function(e) {
+			$f.fireEvent(self.id(), 'onFullscreen', video.fp_getVolume());
+		}
+		video.addEventListener('webkitbeginfullscreen', onFullScreenEnter, false);
+		
+		var onFullScreenExit = function(e) {
+			$f.fireEvent(self.id(), 'onFullscreenExit', video.fp_getVolume());
+		}
+		video.addEventListener('webkitendfullscreen', onFullScreenExit, false);	
 	}
 
 	// this is called only on iDevices
