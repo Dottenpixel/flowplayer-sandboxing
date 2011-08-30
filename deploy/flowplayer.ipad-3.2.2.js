@@ -203,7 +203,7 @@ $f.addPlugin("ipad", function(options) {
 					continue;
 				} else {
 					if ( time == currentTime || // we got the right tick
-						(currentTime - 500 < time && currentTime > time) ) {	// we missed one	
+						(currentTime - 0 < time && currentTime > time) ) {	// we missed one	
 						cues[i].lastTimeFired = fireTime;
 						$f.fireEvent(self.id(), 'onCuepoint', activeIndex, cues[i].fnId, cues[i].parameters);
 					}
@@ -624,6 +624,8 @@ $f.addPlugin("ipad", function(options) {
 						'waiting'];
 		var eventsLogger = function(e) {
 			log("Got event "+ e.type, e);
+
+			//vidtrack( e.type );
 		}
 						
 		for ( var i = 0; i < events.length; i++ )

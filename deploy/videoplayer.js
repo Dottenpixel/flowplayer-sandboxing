@@ -1,4 +1,5 @@
-$.fn.makeVideo = function(o) {
+
+$.fn.makeVideo = function( o ) {
 	var $this = $(this);
 	o.videoProtocol = o.videoURL.substr(0,4);
 	
@@ -14,14 +15,14 @@ $.fn.makeVideo = function(o) {
 		{ "site" : "unionbankcareers.com", 	"fpkey" : "#@762506d39a168884c9b" }
 	];
 	
-	//function that is called on every video player event
+	//function that is called on every track-worthy video player event
 	var vidtrack = function( e ) {
 		var c = $(".debug_text").text();
 		var t = new Date().getTime().toString() + " >> " + o.elementID + " >> " + e + "\n";
 		var cc = c + t;
 		$(".debug_text").text(cc);
 	};
-
+	
 	vidtrack("isiIdevice : " + isiDevice);
 
 
@@ -129,23 +130,25 @@ $.fn.makeVideo = function(o) {
 		},
 		onBeforeBegin: function(c) { 
 		},
-		onMetaData: function(c){ //console.log("metaData"); 
-			var cc=c;
-			var fd = c.fullDuration;
-			var cues = [
-				{ time:fd*.25*c.cuepointMultiplier, name: "25%" }, 
-				{ time:fd*.5*c.cuepointMultiplier, name: "50%" }, 
-				{ time:fd*.75*c.cuepointMultiplier, name: "75%" }
-			];
+		onMetaData: function(c, e){ 
+			if ( c._cuepoints == undefined ) {
+				var cc=c;
+				var fd = c.duration;
+				var cues = [
+					{ time:fd*.25*c.cuepointMultiplier, name: "25%" }, 
+					{ time:fd*.5*c.cuepointMultiplier, name: "50%" }, 
+					{ time:fd*.75*c.cuepointMultiplier, name: "75%" }
+				];
 
-			c.onCuepoint(
-				// each integer represents milliseconds in the timeline
-				cues,
-				// this function is triggered when a cuepoint is reached
-				function(clip, cuepoint) {
-					vidtrack("progress_"+cuepoint.name);
-				}
-			 );
+				c.onCuepoint(
+					// each integer represents milliseconds in the timeline
+					cues,
+					// this function is triggered when a cuepoint is reached
+					function(clip, cuepoint) {
+						vidtrack("progress_"+cuepoint.name);
+					}
+				 );
+			}
 		},
 		onBegin: function(c) { 
 		},
@@ -305,4 +308,6 @@ $.fn.makeVideo = function(o) {
 		clip: playerClipOptions,
 		plugins: playerPluginOptions
 	}).ipad(); //{simulateiDevice: true}
+	
+	return $f(playerID);
 };
