@@ -111,6 +111,7 @@ $f.addPlugin("ipad", function(options) {
 	// some util funcs
 	function log() {
 		if ( opts.debug ) {
+			$(".debug_text.iOS").text( $(".debug_text.iOS").text() + arguments[0] + '\n' );
 			if ( isiDevice ) {
 				var str = [].splice.call(arguments,0).join(', ');
 				console.log.apply(console, [str]);
