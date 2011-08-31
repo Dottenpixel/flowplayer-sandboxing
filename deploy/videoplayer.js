@@ -17,10 +17,12 @@ $.fn.makeVideo = function( o ) {
 	
 	//function that is called on every track-worthy video player event
 	var vidtrack = function( e ) {
-		var c = $(".debug_text").text();
-		var t = new Date().getTime().toString() + " >> " + o.elementID + " >> " + e + "\n";
-		var cc = c + t;
-		$(".debug_text").text(cc);
+		$(".debug_text").each( function(i,v){
+			var c = $(this).text();
+			var t = new Date().getTime().toString() + " >> " + o.elementID + " >> " + e + "\n";
+			var cc = c + t;
+			$(this).text(cc);
+		});
 	};
 	
 	vidtrack("isiIdevice : " + isiDevice);
@@ -124,6 +126,10 @@ $.fn.makeVideo = function( o ) {
 		autoBuffering : true,
 		bufferLength : 10,
 		onStart: function(c) { 
+			if (o.autoPlay) vidtrack("play");
+			if (isiDevice) {
+				this.getTime() < .5 ? vidtrack("play") : vidtrack("resume")
+			}
 		},
 		onSeek: function(c,t) { 
 			vidtrack("seek_"+t); 
@@ -155,11 +161,11 @@ $.fn.makeVideo = function( o ) {
 		onStop: function(c) { 
 			vidtrack("stop"); 
 		},
-		onResume: function() { 
-			vidtrack("play");
+		onResume: function(c) { 
+			this.getTime() < .5 ? vidtrack("play") : vidtrack("resume")
 		},
 		onPause: function() { 
-			vidtrack("pause");
+			if (this.getTime() > 1) vidtrack("pause");
 		},
 		onFinish: function(c) {
 			vidtrack("finish");
@@ -290,7 +296,7 @@ $.fn.makeVideo = function( o ) {
 			var cc=this.getClip(0);
 		},
 		onMute: function() { 
-			vidtrack("mute");
+			if (this.isLoaded()) vidtrack("mute");
 		},
 		onUnmute: function() { 
 			vidtrack("unmute"); 
