@@ -782,15 +782,17 @@ $f.addPlugin("ipad", function(options) {
 		};
 		video.addEventListener('volumechange', onVolumeChange, false);
 		
+		//custom-added handlers for fullscreen event capture
 		var onFullScreenEnter = function(e) {
-			$f.fireEvent(self.id(), 'onFullscreen', video.fp_getVolume());
+			$f.fireEvent(self.id(), 'onFullscreen', activeIndex);
 		}
 		video.addEventListener('webkitbeginfullscreen', onFullScreenEnter, false);
 		
 		var onFullScreenExit = function(e) {
-			$f.fireEvent(self.id(), 'onFullscreenExit', video.fp_getVolume());
+			$f.fireEvent(self.id(), 'onFullscreenExit', activeIndex);
 		}
 		video.addEventListener('webkitendfullscreen', onFullScreenExit, false);	
+		
 	}
 
 	// this is called only on iDevices
