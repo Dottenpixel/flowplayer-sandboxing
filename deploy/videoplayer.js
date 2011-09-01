@@ -1,7 +1,10 @@
 
 $.fn.makeVideo = function( o ) {
 	var $this = $(this);
+	if (o.videoURL == null) return;
 	o.videoProtocol = o.videoURL.substr(0,4);
+	if (o.branded) $this.addClass("branded");
+	
 	
 	//console.log(o);
 	var playerID = "vid_"+o.elementID;
@@ -25,7 +28,7 @@ $.fn.makeVideo = function( o ) {
 		});
 	};
 	
-	vidtrack("isiIdevice : " + isiDevice);
+	vidtrack("isiDevice : " + isiDevice);
 
 
 	//determine key
@@ -99,9 +102,20 @@ $.fn.makeVideo = function( o ) {
 						"href" : "#",
 						"text" : "SHARE",
 						"class" : "button share"
+					}),
+					$("<div>", {
+						"class" : "addthis_toolbox addthis_default_style addthis_16x16_style"
 					})
 				)
 		);
+		
+		$.each(["facebook","twitter","linkedin"], function(i,v) {
+			$(".addthis_toolbox", $this).append(
+				$("<a>", {
+					"class" : "addthis_button_"+v
+				})
+			)
+		})
 	}
 	//simplify some sub-components for use later in script
 	var ol = $(".overlay", $this);
@@ -238,16 +252,6 @@ $.fn.makeVideo = function( o ) {
 			
 			$(".overlay h1").text("Link to this video:");
 			$(".overlay textarea", $this).html( shareURL );
-			$(".overlay .content", $this).append(
-				$("<div>", {
-					"class" : "addthis_toolbox addthis_default_style addthis_32x32_style"
-				}).append(
-					$("<span>", {
-						"class" : "label",
-						"text" : "Share this video:"
-					})
-					)
-			);
 			$.each(["facebook","twitter","linkedin"], function(i,v) {
 				$(".addthis_toolbox", $this).append(
 					$("<a>", {
@@ -288,7 +292,7 @@ $.fn.makeVideo = function( o ) {
 			NOTE: the logo can only be changed in commercial versions
 			the url must be absolute or relative to the flowplayer SWF
 		*/
-		logo: playerLogoOptions,
+		logo: o.branded ? playerLogoOptions : {},
 		
 		//player-level events
 		onLoad: function(c) { 
