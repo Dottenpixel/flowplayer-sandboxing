@@ -26,9 +26,30 @@
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<style type="text/css" media="screen">
 		body {
+			background-color:#fff;	
+			font-family: Arial, Helvetica, sans-serif;
+			text-align:center;
 			margin: 0;
 			padding: 0;
 		}
+
+		#page {
+			background-color:#efefef;
+			width:600px;
+			margin:50px auto;
+			padding:20px 150px 20px 50px;
+			min-height:600px;
+			border:2px solid #fff;
+			outline:1px solid #ccc;
+			text-align:left;
+			margin: 50px;
+		}
+
+		.less {
+			color:#999;
+			font-size:12px;
+		}
+
 		#config {
 			position: relative;
 			font-size: 12px;
@@ -57,136 +78,6 @@
 		#config .debug textarea {
 			width: 300px;
 			height: 400px;
-		}
-		.overlay {
-			background: rgb(0, 0, 0); /* The Fallback */
-			background: rgba(0, 0, 0, 0.75);
-			padding: 0 0 0 20px;
-			color: #fff;
-			position: absolute;
-			top: 0;
-			left: 0;
-			display: none;
-		}
-		.overlay.iOS {
-			position: relative;
-			top: auto;
-			left: auto;
-			height: 200px;
-			padding: 15px 0 15px 20px;
-		}
-		.overlay h1 {
-			font-size: 18px;
-			margin: 25px 0 10px 0;
-			font-weight: normal;
-		}
-		.overlay.iOS h1 {
-			margin: 0 0 10px 0;
-		}
-		.overlay textarea {
-			height: 300px;
-			padding: 10px;
-			margin: 0;
-			border: 0;
-			font-size: 14px;
-			line-height: 18px;
-			font-family: Arial, sans-serif;
-		}
-		.overlay a.close {
-			font-size: 10px;
-			color: #fff;
- 			border-left: 1px solid #fff;
- 			border-bottom: 1px solid #fff;
-		    text-decoration: none;
-		    display: inline-block;
-		    float: right;
-		    padding: 0 4px;
-		}
-		.overlay.iOS a.close {
- 			border-top: 1px solid #fff;
- 			border-bottom: none;
-			padding: 8px;
-			display: block;
-			clear: both;
-		}
-		.overlay .content {
-			margin: 20px 0;
-		}		
-		.overlay .content .label {
-			float: left;
-			margin: 0 12px 0 0;
-		}
-		
-		p.field input[type=text] {
-			width: 200px;
-		}
-		p.field select,
-		p.field input {
-			position: absolute;
-			left: 200px;
-		}
-		p.caption {
-			font-size: 10px;
-			color: #666;
-		}
-		p.caption em {
-			display: block;
-		}
-		div.video_area {
-			position: relative;
-		}
-		div.video_area .video_player {
-			position: relative;
-		}
-		#page {
-			margin: 50px;
-		}
-		.video_area {
-			margin: 30px 0;
-		}
-		.video_player {
-			background: #000 url(img/video_loader_3d.png) no-repeat center center;
-		}
-		.share_bar {
-			position: relative;
-			background: #000;
-			padding: 0;
-			text-align: right;
-			height: 30px;
-		}
-		.share_bar a.button {
-			font-size: 10px;
-			line-height: 22px;
-			color: #ccc;
-			text-decoration: none;
-			border: 1px solid #444;
-			padding: 0 18px;
-			display: inline-block;
-			margin: 3px 10px 3px 0;
-		}
-		.share_bar.iOS a.button.embed {
-			display: none;
-		}
-		.share_bar a.logo {
-			background: transparent url(img/video_logo_sm.png) no-repeat;
-			width: 108px;
-			height: 24px;
-			display: inline-block;
-			float: left;
-			margin: 3px 0 3px 12px;
-		}
-
-		.share_bar a.button.engaged {
-			background: #ccc;
-			color: #444;
-		}
-		.share_bar a.button:hover {
-			color: #fff;
-			background: #444;
-			border: 1px solid #fff;
-		}
-		.clear {
-			clear: both;
 		}
 	</style>
 	
