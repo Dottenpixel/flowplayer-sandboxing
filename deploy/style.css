@@ -1,8 +1,8 @@
-div.video_area {
+.video_area {
 	position: relative;
 	margin: 30px 0;
 }
-div.video_area .overlay {
+.video_area .overlay {
 	background: rgb(0, 0, 0); /* The Fallback */
 	background: rgba(0, 0, 0, 0.75);
 	padding: 0 0 0 20px;
@@ -12,22 +12,22 @@ div.video_area .overlay {
 	left: 0;
 	display: none;
 }
-div.video_area .overlay.iOS {
+.video_area .overlay.iOS {
 	position: relative;
 	top: auto;
 	left: auto;
 	height: 200px;
 	padding: 15px 0 15px 20px;
 }
-div.video_area .overlay h1 {
+.video_area .overlay h1 {
 	font-size: 18px;
 	margin: 25px 0 10px 0;
 	font-weight: normal;
 }
-div.video_area .overlay.iOS h1 {
+.video_area .overlay.iOS h1 {
 	margin: 0 0 10px 0;
 }
-div.video_area .overlay textarea {
+.video_area .overlay textarea {
 	height: 300px;
 	padding: 10px;
 	margin: 0;
@@ -36,7 +36,7 @@ div.video_area .overlay textarea {
 	line-height: 18px;
 	font-family: Arial, sans-serif;
 }
-div.video_area .overlay a.close {
+.video_area .overlay .close {
 	font-size: 10px;
 	color: #fff;
 	border-left: 1px solid #fff;
@@ -46,82 +46,99 @@ div.video_area .overlay a.close {
     float: right;
     padding: 0 4px;
 }
-div.video_area .overlay.iOS a.close {
+.video_area .overlay.iOS .close {
 	border-top: 1px solid #fff;
 	border-bottom: none;
 	padding: 8px;
 	display: block;
 	clear: both;
 }
-div.video_area .overlay .content {
+.video_area .overlay .content {
 	margin: 20px 0;
 }		
-div.video_area .overlay .content .label {
+.video_area .share_bar span.label,
+.video_area .overlay .content .label {
 	float: left;
-	margin: 0 12px 0 0;
+	margin: 0 6px 0 0;
+	font-size: 12px;
+	color: #fff;
+	line-height: 28px;
 }
 
-div.video_area p.field input[type=text] {
+.video_area p.field input[type=text] {
 	width: 200px;
 }
-div.video_area p.field select,
-div.video_area p.field input {
+.video_area p.field select,
+.video_area p.field input {
 	position: absolute;
 	left: 200px;
 }
-div.video_area p.caption {
+.video_area p.caption {
 	font-size: 10px;
 	color: #666;
 }
-div.video_area p.caption em {
+.video_area p.caption em {
 	display: block;
 }
 
-div.video_area .video_player {
+.video_area .video_player {
 	position: relative;
 }
-
-div.video_area .video_player {
-	background: #000 url(img/video_loader_3d.png) no-repeat center center;
+.video_area .video_player {
+	background: #2846aa none no-repeat center center;
 }
-div.video_area .share_bar {
+.video_area.branded .video_player {
+	background-image: url(img/video_loader_3d.png);
+}
+.video_area .share_bar {
 	position: relative;
-	background: #000;
+	background: #2846aa;
 	padding: 0;
 	text-align: right;
 	height: 30px;
 }
-div.video_area .share_bar .button {
+.video_area .share_bar .button {
 	font-size: 10px;
 	line-height: 22px;
 	color: #ccc;
 	text-decoration: none;
 	border: 1px solid #444;
 	padding: 0 18px;
-	display: inline-block;
+	display: none;
 	margin: 3px 10px 3px 0;
 }
-div.video_area .share_bar.iOS .button.embed {
+.video_area .share_bar.iOS .button.embed {
 	display: none;
 }
-div.video_area .share_bar .logo {
-	background: transparent url(img/video_logo_sm.png) no-repeat;
+
+.video_area .share_bar .logo {
+	background: transparent none no-repeat;
 	width: 108px;
 	height: 24px;
-	display: inline-block;
+	display: block;
 	float: left;
 	margin: 3px 0 3px 12px;
 }
 
-div.video_area .share_bar .button.engaged {
+.video_area.branded .share_bar .logo {
+	background-image: url(img/video_logo_sm.png);
+}
+
+.video_area .share_bar .button.engaged {
 	background: #ccc;
 	color: #444;
 }
-div.video_area .share_bar .button:hover {
+.video_area .share_bar .button:hover {
 	color: #fff;
 	background: #444;
 	border: 1px solid #fff;
 }
-div.video_area .clear {
+
+.video_area .addthis_toolbox {
+	float: right;
+	padding: 6px 12px 0 0;
+}
+
+.video_area .clear {
 	clear: both;
 }

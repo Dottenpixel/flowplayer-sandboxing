@@ -25,6 +25,7 @@
 	<!-- some minimal styling, can be removed -->
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<style type="text/css" media="screen">
+		
 		body {
 			background-color:#fff;	
 			font-family: Arial, Helvetica, sans-serif;
@@ -56,7 +57,7 @@
 			text-align: left;
 			background: #ddd;
 			padding: 10px 10px 40px 10px;
-			float: right;
+			float: none;
 			display: block;
 		}
 		@media screen and (max-width: 900px)
@@ -79,18 +80,93 @@
 			width: 300px;
 			height: 400px;
 		}
+		.debug_text {
+			display: block;
+		}
 	</style>
-	
+<!--[if lte IE 8]>
+	<style type="text/css" media="screen">
+		#config {
+			float: none;
+		}
+	</style>
+<![endif]-->	
 	<!-- page title -->
 	<title>Minimal Flowplayer setup</title>
 
 </head><body>
 
+	<div id="page">
+		
+		<h1>UB Flowplayer setup</h1>
+	
+		<h3>Functional Review</h3>
+		
+		<script>
+			
+			$(document).ready(function(){
+				//if(!_get("i1")) $("form").eq(0).submit();
+			});
+			
+			
+		</script>
+		<script src="videoplayer.js" type="text/javascript" charset="utf-8"></script>
+		
+		<div id="UNIQID" class="video_area"></div>
+		<div id="UNIQID2" class="video_area"></div>
+		<script type="text/javascript">
+				// $("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
+				// 									{
+				// 										"elementID" : _get("i9"),
+				// 										"videoURL" : _get("i1"),
+				// 										"autoPlay" : _get("i3") == "true" ? true : false,
+				// 										"width" : _get("i5"),
+				// 										"height" : _get("i6"),
+				// 										"sharebar" : _get("i10") == "true" ? true : false,
+				// 										"mobileVideoURL" : _get("i2"),
+				// 										"logoLink" : _get("i8"),
+				// 										"branded" : _get("i11")
+				// 				
+				// 									}
+				// 								);
+
+				$("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
+					{
+						"elementID" : "abcdef",
+						"videoURL" : "http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv",
+						"autoPlay" : false,
+						"width" : "640",
+						"height" : "360",
+						"sharebar" : true,
+						"mobileVideoURL" : "http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v",
+						"branded" : true,
+						"logoLink" : ""
+					}
+				);
+				$("#UNIQID2").makeVideo(//JSON Object to be populated for configuration of each video player instance
+					{
+						"elementID" : "123456",
+						"videoURL" : "http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv",
+						"autoPlay" : false,
+						"width" : "640",
+						"height" : "360",
+						"sharebar" : true,
+						"mobileVideoURL" : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
+						"branded" : false,
+						"logoLink" : "http://www.unionbank.com"
+
+					}
+				);
+		</script>
+
+	</div>
+	<textarea class="debug_text iOS" rows="100" cols="50"></textarea>
 	<div id="config">
 		<h1>Configuration</h1>
 		<div class="form">
 			<form action="" method="get" accept-charset="utf-8">
 				<p class="field"><label for="i3">Auto play?</label> <input type="checkbox" name="i3" value="true" id="i3" /></p>
+				<p class="field"><label for="i11">Branded player?</label> <input type="checkbox" checked="checked" name="i11" value="true" id="i11" /></p>
 				<p class="field"><label for="i10">Display Share bar?</label> <input type="checkbox" checked="checked" name="i10" value="true" id="i10" /></p>
 				<p class="field"><label for="i9">Tracking Element ID</label> <input type="text" name="i9" id="i9" value="elemID123" /></p>
 				<p class="field"><label for="i8">Logo link URL</label> <input type="text" name="i8" value="http://www.unionbank.com" id="i8" /></p>
@@ -120,63 +196,4 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div id="page">
-		
-		<h1>UB Flowplayer setup</h1>
-	
-		<h3>Functional Review</h3>
-		
-		<script>
-			
-			$(document).ready(function(){
-				//if(!_get("i1")) $("form").eq(0).submit();
-			});
-			
-			
-		</script>
-		<script src="videoplayer.js" type="text/javascript" charset="utf-8"></script>
-		
-		<div id="UNIQID" class="video_area"></div>
-		<div id="UNIQID2" class="video_area"></div>
-		<script type="text/javascript">
-				// $("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
-				// 					{
-				// 						"elementID" : _get("i9"),
-				// 						"videoURL" : _get("i1"),
-				// 						"autoPlay" : _get("i3") == "true" ? true : false,
-				// 						"width" : _get("i5"),
-				// 						"height" : _get("i6"),
-				// 						"sharebar" : _get("i10") == "true" ? true : false,
-				// 						"mobileVideoURL" : _get("i2"),
-				// 						"logoLink" : _get("i8")
-				// 
-				// 					}
-				// 				);
-
-			// $("#UNIQID2").makeVideo(//JSON Object tobe populated for configuration of each video player instance
-			// 				{
-			// 					"elementID" : "abcdef",
-			// 					"videoURL" : "rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv",
-			// 					"autoPlay" : false,
-			// 					"width" : "640",
-			// 					"height" : "360",
-			// 					"sharebar" : true,
-			// 					"mobileVideoURL" : "http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v"
-			// 				}
-			// 			);
-			$("#UNIQID2").makeVideo(//JSON Object tobe populated for configuration of each video player instance
-				{
-					"elementID" : "abcdef",
-					"videoURL" : "http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv",
-					"autoPlay" : false,
-					"width" : "640",
-					"height" : "360",
-					"sharebar" : true,
-					"mobileVideoURL" : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4"
-				}
-			);
-		</script>
-
-	</div>
-	<textarea class="debug_text iOS" rows="100" cols="50"></textarea>
 </body></html>
