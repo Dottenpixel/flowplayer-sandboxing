@@ -85,14 +85,15 @@
 	position: relative;
 }
 .video_area .video_player {
-	background: #2846aa none no-repeat center center;
+	/* 50% tint of #8e8e8e */
+	background: #c7c7c7 none no-repeat center center;
 }
 .video_area.branded .video_player {
 	background-image: url(img/video_loader_3d.png);
 }
 .video_area .share_bar {
 	position: relative;
-	background: #2846aa;
+	background: #c7c7c7;
 	padding: 0;
 	text-align: right;
 	height: 30px;
