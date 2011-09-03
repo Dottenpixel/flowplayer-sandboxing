@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title></title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="DouG Molidor : Creative Lift">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type="text/javascript" src="flowplayer-3.2.6.min.js"></script>
+	<script type="text/javascript" src="flowplayer.ipad-3.2.2.js"></script>
+	<script type="text/javascript" src="http://static.flowplayer.org/js/flowplayer.embed-3.0.3.min.js"></script>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e56aee8709871b3"></script>
+	<script type="text/javascript" src="videoplayer.js" charset="utf-8"></script>
+	
+	<script type="text/javascript" charset="utf-8">
+		//this code is used simply for extract values out of the query string of the code demo
+		function _get(name)
+		{
+		  	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+			return match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : null;
+		}
+	</script>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<!-- Date: 2011-09-01 -->
+</head>
+<body>
+	<div id="vidarea_VIDID" class="video_area"></div>	
+	<script type="text/javascript">
+		$("#vidarea_VIDID").makeVideo(
+			//JSON Object to be populated for configuration of each video player instance
+			//Replace the values of this object with CMS-configured values
+			{
+				"elementID"			:	_get("ELEMID"),
+				"videoURL"			:	_get("VIDURL"),
+				"autoPlay"			:	_get("AUTOPLAY") == "true" ? true : false,
+				"width"				:	_get("WIDTH"),
+				"height"			:	_get("HEIGHT"),
+				"sharebar"			:	_get("SHAREBAR") == "true" ? true : false,
+				"mobileVideoURL"	:	_get("MOBVIDURL"),
+				"logoLink"			:	_get("LOGOLINK"),
+				"branded"			:	_get("BRANDED")
+			}
+		);
+	</script>
+
+</body>
+</html>
