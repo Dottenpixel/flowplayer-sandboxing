@@ -2,68 +2,6 @@
 	position: relative;
 	margin: 30px 0;
 }
-.video_area .overlay {
-	background: rgb(0, 0, 0); /* The Fallback */
-	background: rgba(0, 0, 0, 0.75);
-	padding: 0 0 0 20px;
-	color: #fff;
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: none;
-}
-.video_area .overlay.iOS {
-	position: relative;
-	top: auto;
-	left: auto;
-	height: 200px;
-	padding: 15px 0 15px 20px;
-}
-.video_area .overlay h1 {
-	font-size: 18px;
-	margin: 25px 0 10px 0;
-	font-weight: normal;
-}
-.video_area .overlay.iOS h1 {
-	margin: 0 0 10px 0;
-}
-.video_area .overlay textarea {
-	height: 300px;
-	padding: 10px;
-	margin: 0;
-	border: 0;
-	font-size: 14px;
-	line-height: 18px;
-	font-family: Arial, sans-serif;
-}
-.video_area .overlay .close {
-	font-size: 10px;
-	color: #fff;
-	border-left: 1px solid #fff;
-	border-bottom: 1px solid #fff;
-    text-decoration: none;
-    display: block;
-    float: right;
-    padding: 0 4px;
-}
-.video_area .overlay.iOS .close {
-	border-top: 1px solid #fff;
-	border-bottom: none;
-	padding: 8px;
-	display: block;
-	clear: both;
-}
-.video_area .overlay .content {
-	margin: 20px 0;
-}		
-.video_area .share_bar span.label,
-.video_area .overlay .content .label {
-	float: left;
-	margin: 0 6px 0 0;
-	font-size: 12px;
-	color: #fff;
-	line-height: 28px;
-}
 
 .video_area p.field input[type=text] {
 	width: 200px;
