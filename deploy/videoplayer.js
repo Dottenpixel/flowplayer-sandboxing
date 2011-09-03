@@ -111,9 +111,7 @@ $.fn.makeVideo = function( o ) {
 					}),
 					$("<div>", {
 						"class" : "addthis_toolbox addthis_default_style addthis_16x16_style",
-						"addthis:url" : o.shareURL(),
-						"addthis:title" : o.shareTitle,
-						"addthis:description" : " "
+						"addthis:url" : o.shareURL()
 					})
 				)
 		);
