@@ -80,7 +80,7 @@
 		<script>
 			
 			$(document).ready(function(){
-				//if(!_get("i1")) $("form").eq(0).submit();
+				//if(!_get("VIDURL")) $("form").eq(0).submit();
 			});
 			
 			
@@ -100,19 +100,20 @@
 		<script type="text/javascript">
 				// $("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
 				// 									{
-				// 										"elementID" : _get("i9"),
-				// 										"videoURL" : _get("i1"),
-				// 										"autoPlay" : _get("i3") == "true" ? true : false,
-				// 										"width" : _get("i5"),
-				// 										"height" : _get("i6"),
-				// 										"sharebar" : _get("i10") == "true" ? true : false,
-				// 										"mobileVideoURL" : _get("i2"),
-				// 										"logoLink" : _get("i8"),
-				// 										"branded" : _get("i11")
+				// 										"elementID" : _get("ELEMID"),
+				// 										"videoURL" : _get("VIDURL"),
+				// 										"autoPlay" : _get("AUTOPLAY") == "true" ? true : false,
+				// 										"width" : _get("WIDTH"),
+				// 										"height" : _get("HEIGHT"),
+				// 										"sharebar" : _get("SHAREBAR") == "true" ? true : false,
+				// 										"mobileVideoURL" : _get("MOBVIDURL"),
+				// 										"logoLink" : _get("LOGOLINK"),
+				// 										"branded" : _get("BRANDED")
 				// 				
 				// 									}
 				// 								);
-
+				
+				
 				$("#UNIQID").makeVideo(//JSON Object tobe populated for configuration of each video player instance
 					{
 						"elementID" : "abcdef",
@@ -131,11 +132,11 @@
 						"elementID" : "123456",
 						"videoURL" : "http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv",
 						"autoPlay" : false,
-						"width" : "640",
-						"height" : "360",
+						"width" : "480",
+						"height" : "270",
 						"sharebar" : true,
 						"mobileVideoURL" : "http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4",
-						"branded" : false,
+						"branded" : true,
 						"logoLink" : "http://www.unionbank.com"
 					}
 				);
