@@ -5,6 +5,12 @@ $.fn.makeVideo = function( o ) {
 	o.videoProtocol = o.videoURL.substr(0,4);
 	if (o.branded) $this.addClass("branded");
 	
+	o.shareURL = function() {
+		var h = document.location.href;
+		var hc = h.indexOf("#") > 0 ? h.replace( h.substring(h.indexOf("#")), "") : h;
+		var shareURL = hc + "#" + playerID;
+		return shareURL;
+	}
 	
 	//console.log(o);
 	var playerID = "vid_"+o.elementID;
@@ -104,7 +110,10 @@ $.fn.makeVideo = function( o ) {
 						"class" : "button share"
 					}),
 					$("<div>", {
-						"class" : "addthis_toolbox addthis_default_style addthis_16x16_style"
+						"class" : "addthis_toolbox addthis_default_style addthis_16x16_style",
+						"addthis:url" : o.shareURL(),
+						"addthis:title" : o.shareTitle,
+						"addthis:description" : " "
 					})
 				)
 		);
