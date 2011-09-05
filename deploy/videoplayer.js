@@ -953,6 +953,23 @@ $f.addPlugin("ipad", function(options) {
 $.fn.makeVideo = function( o ) {
 	var $this = $(this);
 	if (o.videoURL == null) return;
+
+	var paths = {
+		"mainPlayer"		:	"flowplayer.commercial-3.2.7.swf",
+		"rtmpPlugin"		:	"flowplayer.rtmp-3.2.3.swf",
+		"akamaiPlugin"		:	"flowplayer.akamai-3.2.0.swf",
+		"controlsPlugin"	:	"flowplayer.controls-3.2.5.swf",
+		"videoLogo"			:	"img/video_logo.png"
+	};
+
+	var siteKeys = [
+		{ "site" : "creativelift.net", 		"fpkey" : "#@905cc47e8164939b12d" },
+		{ "site" : "unionbank.com", 		"fpkey" : "#@0fe097db9d8cebcca91" },
+		{ "site" : "uboc.com", 				"fpkey" : "#@ed7621c5ad8cbbd051e" },
+		{ "site" : "highmarkcapital.com", 	"fpkey" : "#@6f32f5dac6c63c08df5" },
+		{ "site" : "unionbankcareers.com", 	"fpkey" : "#@762506d39a168884c9b" }
+	];
+	
 	o.videoProtocol = o.videoURL.substr(0,4);
 	if (o.branded) $this.addClass("branded");
 	
@@ -966,14 +983,6 @@ $.fn.makeVideo = function( o ) {
 	//console.log(o);
 	var playerID = "vid_"+o.elementID;
 	var isiDevice = (/iP[ad|hone|od]/i.test(navigator.userAgent));
-	
-	var siteKeys = [
-		{ "site" : "creativelift.net", 		"fpkey" : "#@905cc47e8164939b12d" },
-		{ "site" : "unionbank.com", 		"fpkey" : "#@0fe097db9d8cebcca91" },
-		{ "site" : "uboc.com", 				"fpkey" : "#@ed7621c5ad8cbbd051e" },
-		{ "site" : "highmarkcapital.com", 	"fpkey" : "#@6f32f5dac6c63c08df5" },
-		{ "site" : "unionbankcareers.com", 	"fpkey" : "#@762506d39a168884c9b" }
-	];
 	
 	//function that is called on every track-worthy video player event
 	var videoTrackEvent = function( eventName, eventData ) {
@@ -1102,7 +1111,7 @@ $.fn.makeVideo = function( o ) {
 	
 	var playerPluginOptions = {
 		controls: {
-			url : "flowplayer.controls-3.2.5.swf",
+			url : paths.controlsPlugin,
 			fullscreen : true,
 			bottom: 0,
 			autoHide: "always"
@@ -1111,13 +1120,13 @@ $.fn.makeVideo = function( o ) {
 	
 	if (o.videoProtocol == "rtmp") {
 		// here is our rtpm plugin configuration
-		playerPluginOptions.akamai = { url: 'flowplayer.akamai-3.2.0.swf' },
-		playerPluginOptions.rtmp = { url: 'flowplayer.rtmp-3.2.3.swf' }
+		playerPluginOptions.akamai = { url: paths.akamaiPlugin },
+		playerPluginOptions.rtmp = { url: paths.rtmpPlugin }
 	};
 	
 	var playerLogoOptions = {
 		// default logo and its position, relative to video SWF
-		url: 'img/video_logo.png',
+		url: paths.videoLogo,
 		top: 10,
 		right: 15,
 		opacity: 0.4,
@@ -1145,7 +1154,7 @@ $.fn.makeVideo = function( o ) {
 	// for commercial versions you can specify where the user is redirected when the logo is clicked
 	if (o.logoLink) playerLogoOptions.linkUrl = o.logoLink;
 	
-	$f(playerID, {src: "flowplayer.commercial-3.2.7.swf", wmode: "transparent"}, {
+	$f(playerID, {src: paths.mainPlayer, wmode: "transparent"}, {
 	
 		// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
 		// 				},

@@ -26,9 +26,7 @@
 	/* 50% tint of #8e8e8e */
 	background: #c7c7c7 none no-repeat center center;
 }
-.video_area.branded .video_player {
-	background-image: url(img/video_loader_3d.png);
-}
+
 .video_area .share_bar {
 	position: relative;
 	background: #c7c7c7;
@@ -59,10 +57,6 @@
 	margin: 3px 0 3px 12px;
 }
 
-.video_area.branded .share_bar .logo {
-	background-image: url(img/video_logo_sm.png);
-}
-
 .video_area .share_bar .button.engaged {
 	background: #ccc;
 	color: #444;
@@ -80,4 +74,12 @@
 
 .video_area .clear {
 	clear: both;
+}
+
+.video_area.branded .share_bar .logo {
+	background-image: url(img/video_logo_sm.png);
+}
+
+.video_area.branded .video_player {
+	background-image: url(img/video_loader_3d.png);
 }
