@@ -21,8 +21,9 @@
 
 .video_area .video_player {
 	position: relative;
-}
-.video_area .video_player {
+	text-decoration: none;
+	color: #000;
+	
 	/* 50% tint of #8e8e8e */
 	background: #c7c7c7 none no-repeat center center;
 }
@@ -74,6 +75,24 @@
 
 .video_area .clear {
 	clear: both;
+}
+
+.video_area .video_player .fail {
+	width: 75%;
+	height: 75%;
+	background: rgb(255, 255, 255);
+	background: rgba(255, 255, 255, 0.75);
+	margin: 0 auto;
+	padding: 12px;
+	position: relative;
+	top: 20px;
+	font-size: 12px;
+}
+
+.video_area .video_player .fail h2,
+.video_area .video_player .fail h3 {
+	margin: 2px 0;
+	
 }
 
 .video_area.branded .share_bar .logo {

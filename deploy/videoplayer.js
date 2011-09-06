@@ -23,7 +23,6 @@
  * Revision: 4901
  */
 
-
 $f.addPlugin("ipad", function(options) {
 	var STATE_UNLOADED = -1;
 	var STATE_LOADED    = 0;
@@ -102,7 +101,7 @@ $f.addPlugin("ipad", function(options) {
 		simulateiDevice: false,
 		controlsSizeRatio: 1.5,
 		controls: true,
-		debug: true,
+		debug: false,
 		validExtensions: /mov|m4v|mp4|avi/gi
 	};
 
@@ -111,7 +110,6 @@ $f.addPlugin("ipad", function(options) {
 	// some util funcs
 	function log() {
 		if ( opts.debug ) {
-			$(".debug_text.iOS").text( $(".debug_text.iOS").text() + arguments[0] + '\n' );
 			if ( isiDevice ) {
 				var str = [].splice.call(arguments,0).join(', ');
 				console.log.apply(console, [str]);
@@ -178,7 +176,7 @@ $f.addPlugin("ipad", function(options) {
 		if ( _playTimeTracker )
 			return;
 			
-		console.log("starting tracker");
+		//console.log("starting tracker");
 		_playTimeTracker = setInterval(onTimeTracked, 100);
 		onTimeTracked();
 	}
@@ -952,7 +950,11 @@ $f.addPlugin("ipad", function(options) {
 
 $.fn.makeVideo = function( o ) {
 	var $this = $(this);
-	if (o.videoURL == null) return;
+	if (o.videoURL == "") return;
+	//console.log(o);
+	var playerID = "vid_"+o.elementID;
+	var isiDevice = (/iP[ad|hone|od]/i.test(navigator.userAgent));
+	var hasMobileVid = (o.mobileVideoURL == "") ? false : true;
 
 	var paths = {
 		"mainPlayer"		:	"flowplayer.commercial-3.2.7.swf",
@@ -979,11 +981,7 @@ $.fn.makeVideo = function( o ) {
 		var shareURL = hc + "#" + playerID;
 		return shareURL;
 	}
-	
-	//console.log(o);
-	var playerID = "vid_"+o.elementID;
-	var isiDevice = (/iP[ad|hone|od]/i.test(navigator.userAgent));
-	
+		
 	//function that is called on every track-worthy video player event
 	var videoTrackEvent = function( eventName, eventData ) {
 		eventData = (typeof eventData == 'undefined') ? "" : eventData;
@@ -996,9 +994,6 @@ $.fn.makeVideo = function( o ) {
 		});
 		//--end
 	};
-	
-	videoTrackEvent("isiDevice : " + isiDevice);
-
 
 	//determine key
 	var playerKey = function(){
@@ -1056,6 +1051,40 @@ $.fn.makeVideo = function( o ) {
 	if(isiDevice) {
 		sb.addClass("iOS");
 	}
+	
+	if(isiDevice && !hasMobileVid) {
+		$(".video_player", $this).wrapInner( 
+			$("<div>", {
+				"class": "fail"
+			})
+		).find(".fail").prepend(
+			$("<h1>", { "html": "We’re sorry.<br/>This video is not available on your device" })
+		);
+		sb.hide();
+		return;
+	}
+	
+	var flashOptions = {
+		// our Flash component
+		src: paths.mainPlayer,
+		wmode: "transparent",
+		
+		// we need at least this Flash version
+		version: [9, 115],
+
+		// older versions will see a custom message
+		onFail: function()  {
+			$(this.getContainer()).wrapInner( 
+				$("<div>", {
+					"class": "fail"
+				})
+			).find(".fail").prepend(
+				$("<h1>", { "html": "We’re sorry.<br/>This video cannot be loaded" })
+			);
+			sb.hide();
+		}
+	};
+	
 	
 	var playerClipOptions = {
 		provider : o.videoProtocol,
@@ -1154,7 +1183,7 @@ $.fn.makeVideo = function( o ) {
 	// for commercial versions you can specify where the user is redirected when the logo is clicked
 	if (o.logoLink) playerLogoOptions.linkUrl = o.logoLink;
 	
-	$f(playerID, {src: paths.mainPlayer, wmode: "transparent"}, {
+	$f(playerID, flashOptions, {
 	
 		// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
 		// 				},
