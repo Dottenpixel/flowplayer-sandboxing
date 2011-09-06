@@ -986,7 +986,7 @@ $.fn.makeVideo = function( o ) {
 	var videoTrackEvent = function( eventName, eventData ) {
 		eventData = (typeof eventData == 'undefined') ? "" : eventData;
 		//start -- custom tracking code
-		//the following code can be replaced with your own custom tracing event code
+		//the following code can be replaced with custom tracing event code that suits your analytics provider
 		$(".debug_text").each( function(i,v){
 			var c = $(this).text();
 			var t = new Date().getTime().toString() + " >> " + o.elementID + " >> " + eventName + ":" + eventData + "\n";

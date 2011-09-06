@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>config</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="DouG Molidor : Creative Lift">
+	<!-- Date: 2011-09-02 -->
+	
+	<style type="text/css" media="screen">
+		#config {
+			position: relative;
+			font-size: 12px;
+			text-align: left;
+			background: #ddd;
+			padding: 10px 10px 40px 10px;
+			float: none;
+			display: block;
+		}
+		@media screen and (max-width: 900px)
+		{
+			#config { display: none; }
+		}
+		#config h1{
+			font-size: 18px;
+			margin: 8px 0;
+			color: #444;
+		}
+		#config form {
+			width: 400px;
+			padding: 0 0 40px 0;
+		}
+		#config .debug {
+			padding: 0 0 0 25px;
+		}
+		#config .debug textarea {
+			width: 300px;
+			height: 400px;
+		}
+	</style>
+</head>
+<body>
+	<div id="config">
+		<h1>Video Configuration Demo</h1>
+		<div class="form">
+			<form action="video.html" method="get" accept-charset="utf-8">
+				<p class="field"><label for="VIDID">Video Container ID (no spaces)</label> <input type="text" name="VIDID" value="VIDID" id="VIDID" /></p>
+				<p class="field"><label for="AUTOPLAY">Auto play?</label> <input type="checkbox" name="AUTOPLAY" value="true" id="AUTOPLAY" /></p>
+				<p class="field"><label for="BRANDED">Branded player?</label> <input type="checkbox" checked="checked" name="BRANDED" value="true" id="BRANDED" /></p>
+				<p class="field"><label for="SHAREBAR">Display Share bar?</label> <input type="checkbox" checked="checked" name="SHAREBAR" value="true" id="SHAREBAR" /></p>
+				<p class="field"><label for="ELEMID">Tracking Element ID</label> <input type="text" name="ELEMID" id="ELEMID" value="elemID123" /></p>
+				<p class="field"><label for="LOGOLINK">Logo link URL</label> <input type="text" name="LOGOLINK" value="http://www.unionbank.com" id="LOGOLINK" /></p>
+				<p class="field"><label for="WIDTH">Width</label> <input type="text" name="WIDTH" value="640" id="WIDTH" /></p>
+				<p class="field"><label for="HEIGHT">Height</label> <input type="text" name="HEIGHT" value="360" id="HEIGHT" /></p>
+
+				<p class="field"><label for="VIDURL">Default Video URL</label> <input type="text" name="VIDURL" value="http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv" id="VIDURL" /></p>
+				<p class="caption">Possible demo values: 
+					<em>rtmp://qps-Flash.OnstreamMedia.com/ondemand/FlashDMSP/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
+					<em>http://origin-qps.onstreammedia.com/origin/unionbank/heroes/CHARMAINE JEFFERSON_HD.flv</em>
+					<em>http://c3343383.r83.cf0.rackcdn.com/Sean McGuinn.flv</em>
+				</p>
+
+				<p class="field"><label for="MOBVIDURL">Mobile Video URL</label> <input type="text" name="MOBVIDURL" value="http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_ame.mp4" id="MOBVIDURL" /></p>
+				<p class="caption">Possible demo values: 
+					<em>http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-960.mp4</em>
+					<em>http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_ame.mp4</em>
+					<em>http://c3343383.r83.cf0.rackcdn.com/Jack Montgomery_iPhone.m4v</em>
+				</p>
+				
+				<p class="field"><input type="submit" value="Continue &rarr;"></p>
+			</form>
+		</div>
+</body>
+</html>
