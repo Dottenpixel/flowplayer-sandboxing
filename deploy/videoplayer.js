@@ -987,6 +987,7 @@ $.fn.makeVideo = function( o ) {
 		eventData = (typeof eventData == 'undefined') ? "" : eventData;
 		//start -- custom tracking code
 		//the following code can be replaced with your own custom tracing event code
+
 		$(".debug_text").each( function(i,v){
 			var c = $(this).text();
 			var t = new Date().getTime().toString() + " >> " + o.elementID + " >> " + eventName + ":" + eventData + "\n";
@@ -1086,7 +1087,25 @@ $.fn.makeVideo = function( o ) {
 		}
 	};
 	
+
+	var playerPluginOptions = {
+		controls: {
+			url : paths.controlsPlugin,
+			fullscreen : true,
+			bottom: 0,
+			autoHide: "always"
+		}
+	};
 	
+	if (o.videoProtocol == "rtmp") {
+		o.rtmpAutoPlay = !o.autoPlay;
+		o.autoPlay = true;
+		// here is our rtpm plugin configuration
+		playerPluginOptions.akamai = { url: paths.akamaiPlugin, onNetStatus: function(){ alert("foo"); } },
+		playerPluginOptions.rtmp = { url: paths.rtmpPlugin }
+	};
+	
+		
 	var playerClipOptions = {
 		provider : o.videoProtocol,
 		ipadUrl : o.mobileVideoURL,
@@ -1123,12 +1142,12 @@ $.fn.makeVideo = function( o ) {
 				 );
 			}
 		},
-		onBegin: function(c) { 
+		onBegin: function(c) {
 		},
 		onStop: function(c) { 
 			videoTrackEvent("stop"); 
 		},
-		onResume: function(c) { 
+		onResume: function(c) {
 			this.getTime() < .5 ? videoTrackEvent("play") : videoTrackEvent("resume")
 		},
 		onPause: function(c) {
@@ -1136,22 +1155,14 @@ $.fn.makeVideo = function( o ) {
 		},
 		onFinish: function(c) {
 			videoTrackEvent("finish");
+		},
+		onNetStreamEvent: function(c,e) {
+			if( o.rtmpAutoPlay && e == "onXMPData") {
+				o.rtmpAutoPlay = false;
+				this.seek(0);
+				this.pause();
+			}
 		}
-	};
-	
-	var playerPluginOptions = {
-		controls: {
-			url : paths.controlsPlugin,
-			fullscreen : true,
-			bottom: 0,
-			autoHide: "always"
-		}
-	};
-	
-	if (o.videoProtocol == "rtmp") {
-		// here is our rtpm plugin configuration
-		playerPluginOptions.akamai = { url: paths.akamaiPlugin },
-		playerPluginOptions.rtmp = { url: paths.rtmpPlugin }
 	};
 	
 	var playerLogoOptions = {
@@ -1186,9 +1197,9 @@ $.fn.makeVideo = function( o ) {
 	
 	$f(playerID, flashOptions, {
 	
-		// log: { level: 'debug'//, filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
-		// 				},
-	
+		// log: { level: 'debug', filter: 'org.flowplayer.akamai.*, org.flowplayer.rtmp.*'
+		// 		 				},
+
 		// commercial version requires product key
 		key: playerKey(),
 	
