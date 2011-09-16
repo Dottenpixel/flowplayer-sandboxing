@@ -1070,7 +1070,8 @@ $.fn.makeVideo = function( o ) {
 		// our Flash component
 		src: paths.mainPlayer,
 		wmode: "transparent",
-		
+		allowscriptaccess: "sameDomain",
+
 		// we need at least this Flash version
 		version: [9, 115],
 
